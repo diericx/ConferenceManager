@@ -11,39 +11,44 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
+  <% if @abstract_proposal != nil then %>
+    <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
+    <%= form.hidden_field :reviewerId, value: current_user.id %>
+  <% end %>
 
-  <div class="field">
-    <%= form.label :recommendation %>
-    <%= form.select :recommendation, @recommendation_options %>
+  <div class="form-group">
+    <strong><%= form.label :recommendation %></strong>
+    <%= form.select(:recommendation, recommendation_options, {}, {:class => "form-control"}) %>
   </div>
   
-  <div class="field">
-    <%= form.label :innovation %>
-    <%= form.select :recommendation, @innovation_options %>
+  <div class="form-group">
+    <strong><%= form.label :innovation %></strong>
+    <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %>
   </div>
 
   <div class="field">
-    <%= form.label :breadth %>
-    <%= form.select :recommendation, @breadth_options %>
+    <strong><%= form.label :breadth %></strong>
+    <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %>
   </div>
 
   <div class="field">
-    <%= form.label :presentationQuality %>
-    <%= form.number_field :presentationQuality, id: :abstract_report_presentationQuality %>
+    <strong><%= form.label :presentationQuality %></strong>
+    <%= form.select(:presentationQuality, presentation_quality_options, {}, {:class => "form-control"}) %>
   </div>
 
   <div class="field">
-    <%= form.label :publicContent %>
-    <%= form.text_field :publicContent, id: :abstract_report_publicContent %>
+    <strong><%= form.label :publicContent %></strong>
+    <%= form.select(:publicContent, public_content_options, {}, {:class => "form-control"}) %>
   </div>
 
   <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_field :notes, id: :abstract_report_notes %>
+    <strong><%= form.label :notes %></strong>
+    <%= form.text_area(:notes, id: :abstract_report_notes, class: "form-control") %>
   </div>
+
+  </br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit Report", class: "btn btn-success" %>
   </div>
 <% end %>

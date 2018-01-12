@@ -29,8 +29,9 @@ class AbstractReportsController < ApplicationController
 
     respond_to do |format|
       if @abstract_report.save
-        format.html { redirect_to @abstract_report, notice: 'Abstract report was successfully created.' }
-        format.json { render :show, status: :created, location: @abstract_report }
+        abstract_proposal = AbstractProposal.find(@abstract_report.abstractId)
+        format.html { redirect_to abstract_proposal, notice: 'Abstract report was successfully created.' }
+        # format.json { render :show, status: :created, location: @abstract_report }
       else
         format.html { render :new }
         format.json { render json: @abstract_report.errors, status: :unprocessable_entity }
@@ -43,8 +44,10 @@ class AbstractReportsController < ApplicationController
   def update
     respond_to do |format|
       if @abstract_report.update(abstract_report_params)
-        format.html { redirect_to @abstract_report, notice: 'Abstract report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @abstract_report }
+        abstract_proposal = AbstractProposal.find(@abstract_report.abstractId)
+        format.html { redirect_to abstract_proposal, notice: 'Abstract report was successfully updated.' }
+        # format.html { redirect_to @abstract_report, notice: 'Abstract report was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @abstract_report }
       else
         format.html { render :edit }
         format.json { render json: @abstract_report.errors, status: :unprocessable_entity }
@@ -70,6 +73,6 @@ class AbstractReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def abstract_report_params
-      params.require(:abstract_report).permit(:abstractId, :recommendation, :innovation, :breadth, :presentationQuality, :publicContent, :notes)
+      params.require(:abstract_report).permit(:abstractId, :reviewerId, :recommendation, :innovation, :breadth, :presentationQuality, :publicContent, :notes)
     end
 end

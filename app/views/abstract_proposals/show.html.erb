@@ -1,25 +1,62 @@
-<p id="notice"><%= notice %></p>
+</br>
 
-<p>
-  <strong>Title:</strong>
-  <%= @abstract_proposal.title %>
-</p>
+<div class="boxed"> 
 
-<p>
-  <strong>Url:</strong>
-  <a href="http://<%=@abstract_proposal.url%>"><%= @abstract_proposal.url %></a>
-</p>
+  <div class="center">
+    <h3><strong>Abstract</strong><h3>
+  </div>
 
-<p>
-  <strong>Conference:</strong>
-  <%= @conference_name %>
-</p>
+  </br>
 
-<% if current_user.admin %>
-  <%= link_to 'Edit', edit_abstract_proposal_path(@abstract_proposal) %> |
+  <p>
+    <strong>Title:</strong>
+    <%= @abstract_proposal.title %>
+  </p>
+
+  <p>
+    <strong>Url:</strong>
+    <a href="http://<%=@abstract_proposal.url%>"><%= @abstract_proposal.url %></a>
+  </p>
+
+  <p>
+    <strong>Conference:</strong>
+    <%= @conference_name %>
+  </p>
+
+  <% if current_user.admin %>
+    <form action="<%= edit_abstract_proposal_path(@abstract_proposal) %>">
+      <button type="submit" class="btn btn-success">Edit</button>  
+    </form>
+  <% end %>
+
+</div>
+
+</br>
+
+<% if @user_submitted_report.length >= 1 then %>
+  <div class="boxed"> 
+    <div class="center">
+      <h3><strong>Your Report</strong><h3>
+    </div>
+
+    </br>
+
+    <% @abstract_report = @user_submitted_report[0] %>
+    <%= render '/abstract_reports/show', abstract_report: @abstract_report, abstract_proposal: @abstract_proposal %>
+  </div>
+<% else %>
+  <div class="boxed">
+    <div class="center">
+      <h3><strong>Report</strong><h3>
+    </div>
+
+    </br>
+
+    <%= render '/abstract_reports/form', abstract_report: @abstract_report %>
+  </div>
 <% end %>
 
-<%= render '/abstract_reports/form', abstract_report: @abstract_report %>
+</br>
 
 <form action="<%= abstract_proposals_path %>">
   <button type="submit" class="btn btn-primary">Back</button>  

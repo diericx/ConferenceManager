@@ -1,0 +1,35 @@
+<p>
+  <strong>Recommendation:</strong>
+  <%= recommendation_options[@abstract_report.recommendation] %>
+</p>
+
+<p>
+  <strong>Innovation:</strong>
+  <%= innovation_options[@abstract_report.innovation] %>
+</p>
+
+<p>
+  <strong>Breadth:</strong>
+  <%= breadth_options[@abstract_report.breadth] %>
+</p>
+
+<p>
+  <strong>Presentationquality:</strong>
+  <%= presentation_quality_options[@abstract_report.presentationQuality] %>
+</p>
+
+<p>
+  <strong>Publiccontent:</strong>
+  <%= @abstract_report.publicContent %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @abstract_report.notes %>
+</p>
+
+<% if current_user.id == @abstract_report.reviewerId then %>
+  <form action="<%= edit_abstract_report_path(@abstract_report) %>">
+    <button type="submit" class="btn btn-success">Edit</button>  
+  </form>
+<% end %>
