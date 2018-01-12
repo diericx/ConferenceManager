@@ -20,6 +20,9 @@ class AbstractProposalsController < ApplicationController
   # GET /abstract_proposals/1.json
   def show
     @recommendation_options = ["Reject", "Poster/Demo", "Lightning-talk", "Full-Talk"]
+    @innovation_options = ["0 - No significant, new contributions", 1, "2 - Some new contributions", 3, "4 - Significant new contributions"]    
+    @breadth_options = ["0 - Highly specialized", 1, "2 - Of interest to >33%", 3, "4 - Of interest to most people"]    
+
     # potential new report
     @abstract_report = AbstractReport.new
     # Get conference name for this Abstract

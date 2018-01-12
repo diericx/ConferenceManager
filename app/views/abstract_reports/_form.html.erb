@@ -17,15 +17,15 @@
     <%= form.label :recommendation %>
     <%= form.select :recommendation, @recommendation_options %>
   </div>
-
+  
   <div class="field">
     <%= form.label :innovation %>
-    <%= form.number_field :innovation, id: :abstract_report_innovation %>
+    <%= form.select :recommendation, @innovation_options %>
   </div>
 
   <div class="field">
     <%= form.label :breadth %>
-    <%= form.number_field :breadth, id: :abstract_report_breadth %>
+    <%= form.select :recommendation, @breadth_options %>
   </div>
 
   <div class="field">

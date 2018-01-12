@@ -17,7 +17,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <% if (current_user.admin == true) then %>
+          <% if (user_signed_in? && current_user.admin == true) then %>
             <li class="nav-item">
               <a class="nav-link" href="/conferences">Conferences</a>
             </li>
