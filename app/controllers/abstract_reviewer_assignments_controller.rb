@@ -1,7 +1,7 @@
 class AbstractReviewerAssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_abstract_reviewer_assignment, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /abstract_reviewer_assignments
   # GET /abstract_reviewer_assignments.json
   def index
@@ -25,12 +25,33 @@ class AbstractReviewerAssignmentsController < ApplicationController
   # POST /abstract_reviewer_assignments
   # POST /abstract_reviewer_assignments.json
   def create
+
+    # get parameters
+    email = params[:abstract_reviewer_assignment][:email]
+    abstract_id = params[:abstract_reviewer_assignment][:abstract_id]
+    # attempt to find user by email
+    user = User.find_by email: email
+    if user == nil
+      respond_to do |format|
+        format.html { redirect_to AbstractProposal.find(abstract_id), alert: "User not found!"}
+        format.json { head :ok }
+      end
+      return
+    end
+
+    # remove invalid email param
+    params[:abstract_reviewer_assignment].delete :email
+
+    # create new ARA
     @abstract_reviewer_assignment = AbstractReviewerAssignment.new(abstract_reviewer_assignment_params)
+    # set newly found user id 
+    @abstract_reviewer_assignment.user_id = user.id
 
     respond_to do |format|
       if @abstract_reviewer_assignment.save
-        format.html { redirect_to @abstract_reviewer_assignment, notice: 'Abstract reviewer assignment was successfully created.' }
-        format.json { render :show, status: :created, location: @abstract_reviewer_assignment }
+        format.html { redirect_to AbstractProposal.find(abstract_id), notice: 'Reviewer was successfully added.' }
+        # format.html { redirect_to @abstract_reviewer_assignment, notice: 'Abstract reviewer assignment was successfully created.' }
+        # format.json { render :show, status: :created, location: @abstract_reviewer_assignment }
       else
         format.html { render :new }
         format.json { render json: @abstract_reviewer_assignment.errors, status: :unprocessable_entity }
@@ -70,6 +91,6 @@ class AbstractReviewerAssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def abstract_reviewer_assignment_params
-      params.require(:abstract_reviewer_assignment).permit(:abstract_id, :user_id)
+      params.require(:abstract_reviewer_assignment).permit(:abstract_id, :user_id, :email)
     end
 end

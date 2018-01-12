@@ -10,15 +10,12 @@
       </ul>
     </div>
   <% end %>
+  
+  <%= form.hidden_field :abstract_id, value: abstract_id %>
 
   <div class="field">
-    <%= form.label :abstract_id %>
-    <%= form.number_field :abstract_id, id: :abstract_reviewer_assignment_abstract_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :abstract_reviewer_assignment_user_id %>
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :email %>
   </div>
 
   <div class="actions">

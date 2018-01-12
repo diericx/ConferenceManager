@@ -33,6 +33,34 @@
 
 </br>
 
+<% if current_user.admin == 1 %>
+  <div class="boxed"> 
+    <div class="center">
+      <h3><strong>Reviewers</strong><h3>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for reviewer in @reviewers do %>
+          <tr>
+            <td><%= User.find(reviewer.user_id).email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= render '/abstract_reviewer_assignments/form', abstract_reviewer_assignment: AbstractReviewerAssignment.new, abstract_id: @abstract_proposal.id %>
+
+  </div>
+<% end %>
+
+</br>
+
 <% if @user_submitted_report.length >= 1 then %>
   <div class="boxed"> 
     <div class="center">

@@ -1,5 +1,5 @@
 class AddAdminFieldToUsers < ActiveRecord::Migration[5.1]
   def change
-    add_column :users, :admin, :bool
+    add_column :users, :admin, :integer
   end
 end

@@ -19,7 +19,10 @@ class AbstractProposalsController < ApplicationController
   # GET /abstract_proposals/1
   # GET /abstract_proposals/1.json
   def show
+    # Report this user has submitted
     @user_submitted_report = AbstractReport.where('(abstractId= ? AND reviewerId= ?)', @abstract_proposal.id, current_user.id)
+    # Users assigned to review this report
+    @reviewers = AbstractReviewerAssignment.where(abstract_id: @abstract_proposal.id)
     # potential new report
     @abstract_report = AbstractReport.new
     # Get conference name for this Abstract
