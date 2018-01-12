@@ -23,27 +23,29 @@
     <a href="http://<%=@abstract_proposal.url%>"><%= @abstract_proposal.url %></a>
   </p>
 
-  <p>
-    <strong>Contact Name:</strong>
-    <%= @abstract_proposal.contact_name %>
-  </p>
+  <% if is_admin?(current_user) %>
+    <p>
+      <strong>Contact Name:</strong>
+      <%= @abstract_proposal.contact_name %>
+    </p>
 
-  <p>
-    <strong>Contact Email:</strong>
-    <%= @abstract_proposal.contact_email %>
-  </p>
+    <p>
+      <strong>Contact Email:</strong>
+      <%= @abstract_proposal.contact_email %>
+    </p>
 
-  <p>
-    <strong>Organization:</strong>
-    <%= @abstract_proposal.organization %>
-  </p>
+    <p>
+      <strong>Organization:</strong>
+      <%= @abstract_proposal.organization %>
+    </p>
+  <% end %>
 
   <p>
     <strong>Proposed Format:</strong>
     <%= @abstract_proposal.proposed_format %>
   </p>
 
-  <% if current_user.admin %>
+  <% if is_admin?(current_user) %>
     <form action="<%= edit_abstract_proposal_path(@abstract_proposal) %>">
       <button type="submit" class="btn btn-success">Edit</button>  
     </form>
@@ -53,7 +55,7 @@
 
 </br>
 
-<% if current_user.admin == 1 %>
+<% if is_admin?(current_user) %>
   <div class="boxed"> 
     <div class="center">
       <h3><strong>Reviewers</strong><h3>

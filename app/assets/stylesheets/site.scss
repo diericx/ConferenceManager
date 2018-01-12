@@ -1,6 +1,5 @@
 .row-proposal {
     width: 100%;
-    background-color: rgb(247, 247, 247);
     &:hover {
         cursor: pointer;
     }
@@ -13,4 +12,8 @@
 .boxed {
     padding: 1.5rem;
     border: solid #f7f7f9;
+}
+
+nav {
+    background-color: #e3f2fd;
 }

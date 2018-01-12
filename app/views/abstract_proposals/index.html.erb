@@ -1,7 +1,7 @@
 </br>
 
 <div class="center">
-  <% if current_user.admin then %>
+  <% if is_admin?(current_user) then %>
     <h1>All Abstract Proposals</h1>
   <% else %>
     <h1>Assigned Abstract Proposals</h1>
@@ -13,7 +13,7 @@
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Url</th>
-      <% if current_user.admin then %>
+      <% if is_admin?(current_user) then %>
         <th scope="col" colspan="3"></th>
       <% end %>
     </tr>
@@ -24,7 +24,7 @@
         <tr class="row-proposal" onclick="window.location='/abstract_proposals/<%= abstract_proposal.id%>'">
           <th scope="row"><%= abstract_proposal.title %></th>
           <th><%= abstract_proposal.url %></th>
-          <% if current_user.admin then %>
+          <% if is_admin?(current_user) then %>
             <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
             <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>    
@@ -34,7 +34,7 @@
 </table>
 
 <br>
-<% if current_user.admin then %>
+<% if is_admin?(current_user) then %>
   <%= link_to 'New Abstract Proposal', new_abstract_proposal_path %>
 <% end %>
 

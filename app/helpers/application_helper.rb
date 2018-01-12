@@ -18,4 +18,12 @@ module ApplicationHelper
     def public_content_options 
         ["True", "False"]
     end
+
+    def is_admin?(user)
+        if user.admin != nil && user.admin > 0
+            return true
+        else
+            return false
+        end
+    end
 end

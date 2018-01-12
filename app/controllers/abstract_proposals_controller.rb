@@ -1,4 +1,5 @@
 class AbstractProposalsController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!
   before_action :set_abstract_proposal, only: [:show, :edit, :update, :destroy]
 
@@ -7,7 +8,7 @@ class AbstractProposalsController < ApplicationController
   def index
     # get proposals for this user
     @abstract_proposals = []
-    if current_user.admin then
+    if is_admin?(current_user) then
       @abstract_proposals = AbstractProposal.all
     else 
       current_users_assigned_proposals = AbstractReviewerAssignment.where(user_id: current_user.id).each do |assignment|
