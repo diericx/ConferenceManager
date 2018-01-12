@@ -1,0 +1,11 @@
+.row-proposal {
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.center {
+    text-align: center;
+}

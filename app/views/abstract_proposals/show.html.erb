@@ -7,13 +7,18 @@
 
 <p>
   <strong>Url:</strong>
-  <%= @abstract_proposal.url %>
+  <a href="http://<%=@abstract_proposal.url%>"><%= @abstract_proposal.url %></a>
 </p>
 
 <p>
-  <strong>Url:</strong>
-  <%= @abstract_proposal.conference_id %>
+  <strong>Conference:</strong>
+  <%= @conference_name %>
 </p>
 
-<%= link_to 'Edit', edit_abstract_proposal_path(@abstract_proposal) %> |
-<%= link_to 'Back', abstract_proposals_path %>
+<% if current_user.admin %>
+  <%= link_to 'Edit', edit_abstract_proposal_path(@abstract_proposal) %> |
+<% end %>
+
+<form action="<%= abstract_proposals_path %>">
+  <button type="submit" class="btn btn-primary">Back</button>  
+</form>

@@ -5,12 +5,20 @@ class AbstractProposalsController < ApplicationController
   # GET /abstract_proposals
   # GET /abstract_proposals.json
   def index
-    @abstract_proposals = AbstractProposal.all
+    @abstract_proposals = []
+    if current_user.admin then
+      @abstract_proposals = AbstractProposal.all
+    else 
+      current_users_assigned_proposals = AbstractReviewerAssignment.where(user_id: current_user.id).each do |assignment|
+        @abstract_proposals.push(AbstractProposal.find(assignment.abstract_id))
+      end
+    end
   end
 
   # GET /abstract_proposals/1
   # GET /abstract_proposals/1.json
   def show
+    @conference_name = Conference.find(@abstract_proposal.conference_id).name
   end
 
   # GET /abstract_proposals/new

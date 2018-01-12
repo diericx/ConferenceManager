@@ -1,4 +1,5 @@
 class AbstractReportsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_abstract_report, only: [:show, :edit, :update, :destroy]
 
   # GET /abstract_reports

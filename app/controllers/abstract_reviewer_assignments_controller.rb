@@ -1,4 +1,5 @@
 class AbstractReviewerAssignmentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_abstract_reviewer_assignment, only: [:show, :edit, :update, :destroy]
 
   # GET /abstract_reviewer_assignments

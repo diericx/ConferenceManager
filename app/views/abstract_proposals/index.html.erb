@@ -1,29 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Abstract Proposals</h1>
+<div class="center">
+  <% if current_user.admin then %>
+    <h1>All Abstract Proposals</h1>
+  <% else %>
+    <h1>Assigned Abstract Proposals</h1>
+  <% end %>
+</div>
 
-<table>
+<table class="table table-hover table-striped" style="width:100%;">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th colspan="3"></th>
+      <th scope="col">Title</th>
+      <th scope="col">Url</th>
+      <% if current_user.admin then %>
+        <th scope="col" colspan="3"></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @abstract_proposals.each do |abstract_proposal| %>
-      <tr>
-        <td><%= abstract_proposal.title %></td>
-        <td><%= abstract_proposal.url %></td>
-        <td><%= link_to 'Show', abstract_proposal %></td>
-        <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
-        <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <tr class="row-proposal" onclick="location.href='/abstract_proposals/<%=abstract_proposal.id%>';">
+        <th scope="row"><%= abstract_proposal.title %></th>
+        <th><%= abstract_proposal.url %></th>
+        <% if current_user.admin then %>
+          <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
+          <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>    
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Abstract Proposal', new_abstract_proposal_path %>
+<% if current_user.admin then %>
+  <%= link_to 'New Abstract Proposal', new_abstract_proposal_path %>
+<% end %>
