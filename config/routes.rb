@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :abstract_reviewer_assignments
+  resources :abstract_reports
   resources :conferences
   devise_for :users
   resources :abstract_proposals

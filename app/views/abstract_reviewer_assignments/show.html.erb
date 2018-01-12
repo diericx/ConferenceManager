@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @abstract_reviewer_assignment.abstract_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @abstract_reviewer_assignment.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_abstract_reviewer_assignment_path(@abstract_reviewer_assignment) %> |
+<%= link_to 'Back', abstract_reviewer_assignments_path %>

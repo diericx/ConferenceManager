@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  abstractId: 1
+  recommendation: 1
+  innovation: 1
+  breadth: 1
+  presentationQuality: 1
+  publicContent: 
+  notes: MyString
+
+two:
+  abstractId: 1
+  recommendation: 1
+  innovation: 1
+  breadth: 1
+  presentationQuality: 1
+  publicContent: 
+  notes: MyString

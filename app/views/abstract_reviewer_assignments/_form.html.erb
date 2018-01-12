@@ -1,0 +1,27 @@
+<%= form_with(model: abstract_reviewer_assignment, local: true) do |form| %>
+  <% if abstract_reviewer_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(abstract_reviewer_assignment.errors.count, "error") %> prohibited this abstract_reviewer_assignment from being saved:</h2>
+
+      <ul>
+      <% abstract_reviewer_assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :abstract_id %>
+    <%= form.number_field :abstract_id, id: :abstract_reviewer_assignment_abstract_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :abstract_reviewer_assignment_user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

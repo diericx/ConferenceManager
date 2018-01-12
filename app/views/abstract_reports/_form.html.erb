@@ -1,0 +1,52 @@
+<%= form_with(model: abstract_report, local: true) do |form| %>
+  <% if abstract_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(abstract_report.errors.count, "error") %> prohibited this abstract_report from being saved:</h2>
+
+      <ul>
+      <% abstract_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :abstractId %>
+    <%= form.number_field :abstractId, id: :abstract_report_abstractId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recommendation %>
+    <%= form.number_field :recommendation, id: :abstract_report_recommendation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :innovation %>
+    <%= form.number_field :innovation, id: :abstract_report_innovation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :breadth %>
+    <%= form.number_field :breadth, id: :abstract_report_breadth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :presentationQuality %>
+    <%= form.number_field :presentationQuality, id: :abstract_report_presentationQuality %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publicContent %>
+    <%= form.text_field :publicContent, id: :abstract_report_publicContent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes, id: :abstract_report_notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

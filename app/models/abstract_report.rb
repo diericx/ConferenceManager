@@ -1,0 +1,2 @@
+class AbstractReport < ApplicationRecord
+end

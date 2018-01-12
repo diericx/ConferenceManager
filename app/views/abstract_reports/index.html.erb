@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Abstract Reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Abstractid</th>
+      <th>Recommendation</th>
+      <th>Innovation</th>
+      <th>Breadth</th>
+      <th>Presentationquality</th>
+      <th>Publiccontent</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @abstract_reports.each do |abstract_report| %>
+      <tr>
+        <td><%= abstract_report.abstractId %></td>
+        <td><%= abstract_report.recommendation %></td>
+        <td><%= abstract_report.innovation %></td>
+        <td><%= abstract_report.breadth %></td>
+        <td><%= abstract_report.presentationQuality %></td>
+        <td><%= abstract_report.publicContent %></td>
+        <td><%= abstract_report.notes %></td>
+        <td><%= link_to 'Show', abstract_report %></td>
+        <td><%= link_to 'Edit', edit_abstract_report_path(abstract_report) %></td>
+        <td><%= link_to 'Destroy', abstract_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Abstract Report', new_abstract_report_path %>

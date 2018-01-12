@@ -1,0 +1,2 @@
+module AbstractReviewerAssignmentsHelper
+end

@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112011104) do
+ActiveRecord::Schema.define(version: 20180112033126) do
 
   create_table "abstract_proposals", force: :cascade do |t|
     t.string "title"
     t.string "url"
     t.integer "conference_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "abstract_reports", force: :cascade do |t|
+    t.integer "abstractId"
+    t.integer "recommendation"
+    t.integer "innovation"
+    t.integer "breadth"
+    t.integer "presentationQuality"
+    t.boolean "publicContent"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "abstract_reviewer_assignments", force: :cascade do |t|
+    t.integer "abstract_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

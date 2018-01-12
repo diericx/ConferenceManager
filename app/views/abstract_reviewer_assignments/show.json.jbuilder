@@ -1,0 +1,1 @@
+json.partial! "abstract_reviewer_assignments/abstract_reviewer_assignment", abstract_reviewer_assignment: @abstract_reviewer_assignment

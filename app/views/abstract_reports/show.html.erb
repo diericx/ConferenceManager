@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Abstractid:</strong>
+  <%= @abstract_report.abstractId %>
+</p>
+
+<p>
+  <strong>Recommendation:</strong>
+  <%= @abstract_report.recommendation %>
+</p>
+
+<p>
+  <strong>Innovation:</strong>
+  <%= @abstract_report.innovation %>
+</p>
+
+<p>
+  <strong>Breadth:</strong>
+  <%= @abstract_report.breadth %>
+</p>
+
+<p>
+  <strong>Presentationquality:</strong>
+  <%= @abstract_report.presentationQuality %>
+</p>
+
+<p>
+  <strong>Publiccontent:</strong>
+  <%= @abstract_report.publicContent %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @abstract_report.notes %>
+</p>
+
+<%= link_to 'Edit', edit_abstract_report_path(@abstract_report) %> |
+<%= link_to 'Back', abstract_reports_path %>
