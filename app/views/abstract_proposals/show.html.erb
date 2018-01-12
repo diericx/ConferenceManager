@@ -14,13 +14,33 @@
   </p>
 
   <p>
+    <strong>Conference:</strong>
+    <%= @conference_name %>
+  </p>
+
+  <p>
     <strong>Url:</strong>
     <a href="http://<%=@abstract_proposal.url%>"><%= @abstract_proposal.url %></a>
   </p>
 
   <p>
-    <strong>Conference:</strong>
-    <%= @conference_name %>
+    <strong>Contact Name:</strong>
+    <%= @abstract_proposal.contact_name %>
+  </p>
+
+  <p>
+    <strong>Contact Email:</strong>
+    <%= @abstract_proposal.contact_email %>
+  </p>
+
+  <p>
+    <strong>Organization:</strong>
+    <%= @abstract_proposal.organization %>
+  </p>
+
+  <p>
+    <strong>Proposed Format:</strong>
+    <%= @abstract_proposal.proposed_format %>
   </p>
 
   <% if current_user.admin %>

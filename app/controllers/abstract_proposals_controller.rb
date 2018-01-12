@@ -87,6 +87,6 @@ class AbstractProposalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def abstract_proposal_params
-      params.require(:abstract_proposal).permit(:title, :url, :conference_id)
+      params.require(:abstract_proposal).permit(:title, :url, :contact_name, :contact_email, :organization, :proposed_format, :conference_id)
     end
 end

@@ -21,14 +21,14 @@
 
   <tbody>
     <% @abstract_proposals.each do |abstract_proposal| %>
-      <tr class="row-proposal" onclick="location.href='/abstract_proposals/<%=abstract_proposal.id%>';">
-        <th scope="row"><%= abstract_proposal.title %></th>
-        <th><%= abstract_proposal.url %></th>
-        <% if current_user.admin then %>
-          <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
-          <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>    
-      </tr>
+        <tr class="row-proposal" onclick="window.location='/abstract_proposals/<%= abstract_proposal.id%>'">
+          <th scope="row"><%= abstract_proposal.title %></th>
+          <th><%= abstract_proposal.url %></th>
+          <% if current_user.admin then %>
+            <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
+            <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>    
+        </tr>
     <% end %>
   </tbody>
 </table>
@@ -37,3 +37,11 @@
 <% if current_user.admin then %>
   <%= link_to 'New Abstract Proposal', new_abstract_proposal_path %>
 <% end %>
+
+<script>
+  const clickableRows = document.querySelectorAll('[data-behavior=clickable-row]');
+  
+  clickableRows.addEventListener('click', event => {
+    window.location = event.currentTarget.dataset.url;
+  });
+</script>

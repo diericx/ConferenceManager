@@ -24,13 +24,33 @@
   </div>
 
   <div class="field">
+    <%= form.label :conference_id %>
+    <%= form.select :conference_id, conferenceOptions %>
+  </div>
+
+  <div class="field">
     <%= form.label :url %>
     <%= form.text_field :url, id: :abstract_proposal_url %>
   </div>
 
   <div class="field">
-    <%= form.label :conference_id %>
-    <%= form.select :conference_id, conferenceOptions %>
+    <%= form.label :contact_name %>
+    <%= form.text_field :contact_name, id: :abstract_proposal_contact_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_email %>
+    <%= form.text_field :contact_email, id: :abstract_proposal_contact_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organization %>
+    <%= form.text_field :organization, id: :abstract_proposal_organization %>
+  </div>
+
+  <div class="field">
+    <%= form.label :proposed_format %>
+    <%= form.text_field :proposed_format, id: :abstract_proposal_proposed_format %>
   </div>
 
   <div class="actions">
