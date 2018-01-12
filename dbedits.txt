@@ -1,0 +1,6 @@
+rails generate migration add_admin_field_to_users admin:bool
+rails generate scaffold Conference name:string year:integer
+
+TODO
+rails generate scaffold AbstractReview score:integer notes:string
+rails generate scaffold AbstractReviewerAssignment abstract_id:integer user_id:integer

@@ -1,0 +1,2 @@
+class AbstractProposal < ApplicationRecord
+end

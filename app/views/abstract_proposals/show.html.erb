@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @abstract_proposal.title %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @abstract_proposal.url %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @abstract_proposal.conference_id %>
+</p>
+
+<%= link_to 'Edit', edit_abstract_proposal_path(@abstract_proposal) %> |
+<%= link_to 'Back', abstract_proposals_path %>
