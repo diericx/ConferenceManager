@@ -11,14 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :abstractId %>
-    <%= form.number_field :abstractId, id: :abstract_report_abstractId %>
-  </div>
+  <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
 
   <div class="field">
     <%= form.label :recommendation %>
-    <%= form.number_field :recommendation, id: :abstract_report_recommendation %>
+    <%= form.select :recommendation, @recommendation_options %>
   </div>
 
   <div class="field">

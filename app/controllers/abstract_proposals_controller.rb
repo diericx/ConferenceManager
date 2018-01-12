@@ -5,6 +5,7 @@ class AbstractProposalsController < ApplicationController
   # GET /abstract_proposals
   # GET /abstract_proposals.json
   def index
+    # get proposals for this user
     @abstract_proposals = []
     if current_user.admin then
       @abstract_proposals = AbstractProposal.all
@@ -18,6 +19,10 @@ class AbstractProposalsController < ApplicationController
   # GET /abstract_proposals/1
   # GET /abstract_proposals/1.json
   def show
+    @recommendation_options = ["Reject", "Poster/Demo", "Lightning-talk", "Full-Talk"]
+    # potential new report
+    @abstract_report = AbstractReport.new
+    # Get conference name for this Abstract
     @conference_name = Conference.find(@abstract_proposal.conference_id).name
   end
 

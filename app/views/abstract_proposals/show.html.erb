@@ -19,6 +19,8 @@
   <%= link_to 'Edit', edit_abstract_proposal_path(@abstract_proposal) %> |
 <% end %>
 
+<%= render '/abstract_reports/form', abstract_report: @abstract_report %>
+
 <form action="<%= abstract_proposals_path %>">
   <button type="submit" class="btn btn-primary">Back</button>  
 </form>
