@@ -16,7 +16,11 @@ module ApplicationHelper
     end
 
     def public_content_options 
-        ["True", "False"]
+        [["True", true], ["False", false]]
+    end
+
+    def conflict_of_interest_options
+        [["True", true], ["False", false]]
     end
 
     def is_admin?(user)

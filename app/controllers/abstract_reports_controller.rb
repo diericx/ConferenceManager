@@ -45,7 +45,7 @@ class AbstractReportsController < ApplicationController
     respond_to do |format|
       if @abstract_report.update(abstract_report_params)
         abstract_proposal = AbstractProposal.find(@abstract_report.abstractId)
-        format.html { redirect_to abstract_proposal, notice: 'Abstract report was successfully updated.' }
+        format.html { redirect_to "/", notice: 'Abstract report was successfully updated.' }
         # format.html { redirect_to @abstract_report, notice: 'Abstract report was successfully updated.' }
         # format.json { render :show, status: :ok, location: @abstract_report }
       else
@@ -73,6 +73,6 @@ class AbstractReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def abstract_report_params
-      params.require(:abstract_report).permit(:abstractId, :reviewerId, :recommendation, :innovation, :breadth, :presentationQuality, :publicContent, :notes)
+      params.require(:abstract_report).permit(:abstractId, :reviewerId, :recommendation, :innovation, :breadth, :presentationQuality, :publicContent, :conflictOfInterest, :notes)
     end
 end

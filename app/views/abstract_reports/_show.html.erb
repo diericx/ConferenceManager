@@ -1,7 +1,11 @@
+
 <p>
-  <strong>Recommendation:</strong>
-  <%= recommendation_options[@abstract_report.recommendation] %>
+  <strong>Conflict of Interest/Not Enough Expertise to Review:</strong>
+  <%= @abstract_report.conflictOfInterest %>
 </p>
+<br>
+
+
 
 <p>
   <strong>Innovation:</strong>
@@ -23,10 +27,21 @@
   <%= @abstract_report.publicContent %>
 </p>
 
+
+<br>
 <p>
   <strong>Notes:</strong>
   <%= @abstract_report.notes %>
 </p>
+
+<br>
+
+ <strong>Recommendation:</strong>
+  <%= recommendation_options[@abstract_report.recommendation] %>
+</p>
+
+
+
 
 <% if current_user.id == @abstract_report.reviewerId then %>
   <form action="<%= edit_abstract_report_path(@abstract_report) %>">
