@@ -9,26 +9,43 @@
 </div>
 
 <table class="table table-hover table-striped" style="width:100%;">
+
   <thead>
     <tr>
+
       <th scope="col">Title</th>
-      <th scope="col">Url</th>
+
       <% if is_admin?(current_user) then %>
+        <th scop="col"> reviews </th>
+        <th scop="col"> max reviews </th>
+        <th scop="col"> Innovation score </th>
+        <th scop="col"> Breadth score </th>
+        <th scop="col"> Quality score </th>
+        <th scop="col"> Recommendation score </th>
         <th scope="col" colspan="3"></th>
       <% end %>
     </tr>
   </thead>
 
   <tbody>
+    <% i = 0 %>
     <% @abstract_proposals.each do |abstract_proposal| %>
         <tr class="row-proposal" onclick="window.location='/abstract_proposals/<%= abstract_proposal.id%>'">
           <th scope="row"><%= abstract_proposal.title %></th>
-          <th><%= abstract_proposal.url %></th>
+
+          
           <% if is_admin?(current_user) then %>
+            <th scope="row"><%= @reviews_percent[i] %>%</th>
+            <th scope="row"><%= @assigned_reviewers[i] %></th>
+            <th scope="row"><%= @innovation[i] %></th>
+            <th scope="row"><%= @breadth[i] %></th>
+            <th scope="row"><%= @quality[i] %></th>
+            <th scope="row"><%= @recommendation[i] %></th>
             <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
             <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>    
         </tr>
+        <% i += 1 %>
     <% end %>
   </tbody>
 </table>

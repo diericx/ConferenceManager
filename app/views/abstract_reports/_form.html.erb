@@ -11,48 +11,56 @@
     </div>
   <% end %>
 
+  
   <% if @abstract_proposal != nil then %>
-    <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
-    <%= form.hidden_field :reviewerId, value: current_user.id %>
+      <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
+      <%= form.hidden_field :reviewerId, value: current_user.id %>
   <% end %>
 
-
+  </br> 
 
   <div class="form-inline">
     <strong><%= form.label :conflictOfInterest %></strong> &nbsp;&nbsp;&nbsp;
     <!-- <strong>Conflict of Interest/Not Enough Expertise to Review  </strong> &nbsp;&nbsp;&nbsp; -->
-    <%= form.select(:conflictOfInterest, conflict_of_interest_options, {}, {:class => "form-control"}) %>
+    <%= form.check_box :conflictOfInterest %>
   </div>
 
-</br>
+  </br>
 
   <div class="form-inline">
     <strong><%= form.label :innovation %></strong> &nbsp;&nbsp;&nbsp;
     <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %>
   </div>
-</p>
+
+  </p>
+
   <div class="form-inline">
     <strong><%= form.label :breadth %></strong>&nbsp;&nbsp;&nbsp;
     <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %>
   </div>
-</p>
+
+  </p>
+
   <div class="form-inline">
     <strong>Presentation Quality</strong>&nbsp;&nbsp;&nbsp;
     <%= form.select(:presentationQuality, presentation_quality_options, {}, {:class => "form-control"}) %>
   </div>
-</br>
-</p>
 
-</p>
+  </br>
+  </p>
+
+  </p>
+
   <div class="form-inline">
     <strong><%= form.label :notes %></strong>&nbsp;&nbsp;&nbsp;
     <%= form.text_area(:notes, class: "form-control") %>
   </div>
-</p>
+
+  </p>
 
   <div class="form-inline">
     <strong>Content could be presented publically/externally</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.select(:publicContent, public_content_options, {}, {:class => "form-control"}) %>
+    <%= form.check_box :publicContent %>
   </div>
 
 </br>

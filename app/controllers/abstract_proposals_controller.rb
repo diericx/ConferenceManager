@@ -8,12 +8,56 @@ class AbstractProposalsController < ApplicationController
   def index
     # get proposals for this user
     @abstract_proposals = []
+    # arrays for data for each proposal
+    @reviews_percent = []
+    @assigned_reviewers = []
+    @innovation = []
+    @breadth = []
+    @quality = []
+    @recommendation = []
+
     if is_admin?(current_user) then
       @abstract_proposals = AbstractProposal.all
     else 
       current_users_assigned_proposals = AbstractReviewerAssignment.where(user_id: current_user.id).each do |assignment|
         @abstract_proposals.push(AbstractProposal.find(assignment.abstract_id))
       end
+    end
+
+    # Get data for each proposal
+    @abstract_proposals.each do |abstract|
+      reviews = AbstractReport.where(:abstractId => abstract.id)
+      reviewers = AbstractReviewerAssignment.where(:abstract_id => abstract.id)
+
+      @assigned_reviewers.push(reviewers.length)
+      if reviews.length == 0
+        # nothing to calculate
+        @innovation.push(0)
+        @breadth.push(0)
+        @quality.push(0)
+        @recommendation.push(0)
+        
+        if reviewers.length == 0
+          @reviews_percent.push(0)
+        end
+      else
+        @reviews_percent.push(reviews.length.to_f / reviewers.length.to_f * 100)
+
+        # get data for averages
+        i = b = q = r = 0
+        reviews.each do |review|
+          i += review.innovation
+          b += review.breadth
+          q += review.presentationQuality
+          r += review.recommendation
+        end
+
+        @innovation.push(i/reviews.length)
+        @breadth.push(b/reviews.length)
+        @quality.push(q/reviews.length)
+        @recommendation.push(r/reviews.length)
+      end
+
     end
   end
 
