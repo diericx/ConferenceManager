@@ -1,5 +1,6 @@
 class AbstractProposalsController < ApplicationController
   include ApplicationHelper
+  include AbstractProposalsHelper
   before_action :authenticate_user!
   before_action :set_abstract_proposal, only: [:show, :edit, :update, :destroy]
 
@@ -24,41 +25,9 @@ class AbstractProposalsController < ApplicationController
       end
     end
 
-    # Get data for each proposal
-    @abstract_proposals.each do |abstract|
-      reviews = AbstractReport.where(:abstractId => abstract.id)
-      reviewers = AbstractReviewerAssignment.where(:abstract_id => abstract.id)
-
-      @assigned_reviewers.push(reviewers.length)
-      if reviews.length == 0
-        # nothing to calculate
-        @innovation.push(0)
-        @breadth.push(0)
-        @quality.push(0)
-        @recommendation.push(0)
-        
-        if reviewers.length == 0
-          @reviews_percent.push(0)
-        end
-      else
-        @reviews_percent.push(reviews.length.to_f / reviewers.length.to_f * 100)
-
-        # get data for averages
-        i = b = q = r = 0
-        reviews.each do |review|
-          i += review.innovation
-          b += review.breadth
-          q += review.presentationQuality
-          r += review.recommendation
-        end
-
-        @innovation.push(i/reviews.length)
-        @breadth.push(b/reviews.length)
-        @quality.push(q/reviews.length)
-        @recommendation.push(r/reviews.length)
-      end
-
-    end
+    # fills in the data tables for each proposal
+    get_data_for_each_proposal()
+    
   end
 
   # GET /abstract_proposals/1
