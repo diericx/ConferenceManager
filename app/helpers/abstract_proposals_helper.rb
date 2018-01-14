@@ -13,10 +13,10 @@ module AbstractProposalsHelper
                 @quality.push(review[0].presentationQuality)
                 @recommendation.push(review[0].recommendation)
             else
-                @innovation.push("N/A")
-                @breadth.push("N/A")
-                @quality.push("N/A")
-                @recommendation.push("N/A")
+                @innovation.push("")
+                @breadth.push("")
+                @quality.push("")
+                @recommendation.push("Not Reviewed")
             end
             return
         end
