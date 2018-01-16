@@ -49,7 +49,7 @@
           <td scope="row"><%= @innovation[i] %></td>
           <td scope="row"><%= @breadth[i] %></td>
           <td scope="row"><%= @quality[i] %></td>
-          <td scope="row"><%= recommendation_options[@recommendation[i]] %></td>
+          <td scope="row"><%= recommendation_options_display[@recommendation[i]][0] %></td>
 
           <% if is_admin?(current_user) then %>
             <td><%= link_to 'Edit', edit_submission_path(submission) %></td>

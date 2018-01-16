@@ -92,12 +92,13 @@
     </br>
 
     <% @submission_review = @user_submitted_review[0] %>
-    <%= render '/submission_reviews/show', submission_review: @submission_review, submission: @submission %>
+    <%= render '/submission_reviews/form', submission_review: @submission_review %>
+    <!-- <%= render '/submission_reviews/show', submission_review: @submission_review, submission: @submission %> -->
   </div>
 <% else %>
   <div class="boxed">
     <div class="center">
-      <h3><strong>Report</strong><h3>
+      <h3><strong>Review</strong><h3>
     </div>
 
     </br>

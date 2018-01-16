@@ -38,7 +38,7 @@ class SubmissionsController < ApplicationController
     # Users assigned to review this report
     @reviewers = ReviewerAssignment.where(submission_id: @submission.id)
     # potential new report
-    @review = SubmissionReview.new
+    @submission_review = SubmissionReview.new
     # Get conference name for this Submission
     @conference_name = Conference.find(@submission.conference_id).name
   end

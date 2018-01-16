@@ -16,7 +16,7 @@ module SubmissionsHelper
                 @innovation.push("")
                 @breadth.push("")
                 @quality.push("")
-                @recommendation.push("Not Reviewed")
+                @recommendation.push(4)
             end
             return
         end
