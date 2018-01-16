@@ -93,6 +93,29 @@ class AbstractProposalsController < ApplicationController
     end
   end
 
+  def report
+    only_admins()
+    
+    reviewerAssignments = AbstractReviewerAssignment.all
+    @lazy_users = Hash.new
+
+    # get all users who haven't submitted their reports
+    reviewerAssignments.each do |assignment|
+      report = AbstractReport.where(abstractId: assignment.abstract_id, reviewerId: assignment.user_id)
+      # if there is no matching report
+      if report.length == 0
+        user = User.find(assignment.user_id)
+        if @lazy_users[user.email] == nil
+          @lazy_users[user.email] = 1
+        else
+          @lazy_users[user.email] += 1
+        end
+        
+      end
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_abstract_proposal

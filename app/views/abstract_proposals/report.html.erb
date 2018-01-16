@@ -1,0 +1,9 @@
+<div class="center">
+      <h1>Admin Report</h1>
+  </div>
+
+<% @lazy_users.each do |key, value| %>
+    <div>
+        [<%= key %>, <%= value %>]
+    </div>
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'abstract_proposals/report'
+
   resources :abstract_reviewer_assignments
   resources :abstract_reports
   resources :conferences

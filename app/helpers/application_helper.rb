@@ -30,4 +30,10 @@ module ApplicationHelper
             return false
         end
     end
+
+    def only_admins()
+        if current_user.admin == 0
+            redirect_to "/"
+        end
+    end
 end

@@ -6,3 +6,5 @@ rails generate scaffold AbstractReviewerAssignment abstract_id:integer user_id:i
 
 rails g migration add_reviewer_id_to_abstract_report reviewerId:integer
 rails g migration add_fields_id_to_abstract_proposal contact_name:string contact_email:string organization:string proposed_format:string
+
+rails g controller abstract_proposals report 
