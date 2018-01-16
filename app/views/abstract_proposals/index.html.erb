@@ -8,53 +8,55 @@
   <% end %>
 </div>
 
-<table class="table table-hover table-striped" style="width:100%;">
+</br>
+
+<table id="reviews-table" class="table table-hover table-striped" cellspacing="0" width="100%">
 
   <thead>
+
     <tr>
-
       <th scope="col">Title</th>
-
       <% if is_admin?(current_user) then %>
-        <th scop="col"> reviews </th>
-        <th scop="col"> max reviews </th>
+        <th scope="col"> reviews </th>
+        <th scope="col"> max reviews </th>
       <% end %>
 
-      <th scop="col"> Innovation score </th>
-      <th scop="col"> Breadth score </th>
-      <th scop="col"> Quality score </th>
-      <th scop="col"> Recommendation </th>
+      <th scope="col"> Innovation score </th>
+      <th scope="col"> Breadth score </th>
+      <th scope="col"> Quality score </th>
+      <th scope="col"> Recommendation </th>
       
       <% if is_admin?(current_user) then %>
-        <th scope="col" colspan="3"></th>
+        <th scope="col" colspan="1">  </th>
+        <th scope="col" colspan="1">  </th>
       <% end %>
-
     </tr>
+
   </thead>
 
   <tbody>
     <% i = 0 %>
     <% @abstract_proposals.each do |abstract_proposal| %>
         <tr class="row-proposal" onclick="window.location='/abstract_proposals/<%= abstract_proposal.id%>'">
-          <th scope="row"><%= abstract_proposal.title %></th>
+          <td scope="row"><%= abstract_proposal.title %></td>
 
           
           <% if is_admin?(current_user) then %>
-            <th scope="row"><%= @reviews_percent[i] %>%</th>
-            <th scope="row"><%= @assigned_reviewers[i] %></th>
+            <td scope="row"><%= @reviews_percent[i] %>%</td>
+            <td scope="row"><%= @assigned_reviewers[i] %></td>
           <% end %>  
 
-          <th scope="row"><%= @innovation[i] %></th>
-          <th scope="row"><%= @breadth[i] %></th>
-          <th scope="row"><%= @quality[i] %></th>
-          <th scope="row"><%= recommendation_options[@recommendation[i]] %></th>
+          <td scope="row"><%= @innovation[i] %></td>
+          <td scope="row"><%= @breadth[i] %></td>
+          <td scope="row"><%= @quality[i] %></td>
+          <td scope="row"><%= recommendation_options[@recommendation[i]] %></td>
 
           <% if is_admin?(current_user) then %>
             <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
             <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
           <% end %>
 
-          </tr>
+        </tr>
         <% i += 1 %>
     <% end %>
   </tbody>
@@ -66,6 +68,16 @@
 <% end %>
 
 <script>
+  $(document).ready(function() {
+    $('#reviews-table').DataTable({
+      scrollY: 300,
+      paging: false,
+      "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">'
+    });
+  });
+
+  $('.dataTables_filter').addClass('pull-left');
+
   const clickableRows = document.querySelectorAll('[data-behavior=clickable-row]');
   
   clickableRows.addEventListener('click', event => {
