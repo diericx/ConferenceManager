@@ -17,63 +17,39 @@
       <%= form.hidden_field :reviewer_id, value: current_user.id %>
   <% end %>
 
-  </br> 
-
-  <div class="form-inline">
-    <strong><%= form.label :conflict_of_interest %></strong> &nbsp;&nbsp;&nbsp;
-    <!-- <strong>Conflict of Interest/Not Enough Expertise to Review  </strong> &nbsp;&nbsp;&nbsp; -->
-    <%= form.check_box :conflict_of_interest %>
-  </div>
-
-  </br>
-
-  <div class="form-inline">
-    <strong><%= form.label :innovation %></strong> &nbsp;&nbsp;&nbsp;
-    <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %>
-  </div>
-
-  </p>
-
-  <div class="form-inline">
-    <strong><%= form.label :breadth %></strong>&nbsp;&nbsp;&nbsp;
-    <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %>
-  </div>
-
-  </p>
-
-  <div class="form-inline">
-    <strong>Presentation Quality</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.select(:presentation_quality, presentation_quality_options, {}, {:class => "form-control"}) %>
-  </div>
-
-  </br>
-  </p>
-
-  </p>
-
-  <div class="form-inline">
-    <strong><%= form.label :notes %></strong>&nbsp;&nbsp;&nbsp;
-    <%= form.text_area(:notes, class: "form-control") %>
-  </div>
-
-  </p>
-
-  <div class="form-inline">
-    <strong>Content could be presented publically/externally</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.check_box :public_content %>
-  </div>
-
-</br>
-</p>
-</br>
-</p>
-
-</br>
-  <div class="form-inline">
-    <strong>Overall Recommendation</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.select(:recommendation, recommendation_options, {}, {:class => "form-control"}) %>
-  </div>
-
+  <table class="table">
+      
+      <tbody>
+          <tr>
+            <td> Conflict of Interest </td>
+            <td> <%= form.check_box :conflict_of_interest %> </td>
+          </tr>
+          <tr>
+            <td> Innovation </td>
+            <td> <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %> </td>
+          </tr>
+          <tr>
+            <td> Breadth </td>
+            <td> <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %> </td>
+          </tr>
+          <tr>
+            <td> Presentation Quality </td>
+            <td> <%= form.select(:presentation_quality, presentation_quality_options, {}, {:class => "form-control"}) %> </td>
+          </tr>
+          <tr>
+            <td> Content could be presented publically/externally </td>
+            <td> <%= form.check_box :public_content %> </td>
+          </tr>
+          <tr>
+            <td> Notes </td>
+            <td> <%= form.text_area(:notes, class: "form-control") %> </td>
+          </tr>
+          <tr>
+            <td> Overall Recommendation </td>
+            <td> <%= form.select(:recommendation, recommendation_options, {}, {:class => "form-control"}) %> </td>
+          </tr>
+      </tbody>
+  </table>
 
   </br>
 
