@@ -71,7 +71,9 @@
   $(document).ready(function() {
     $('#reviews-table').DataTable({
       scrollY: 300,
-      "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">'
+      "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">',
+      "iDisplayLength": 25,
+      "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
     });
   });
 
