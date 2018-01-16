@@ -101,9 +101,9 @@ class SubmissionsController < ApplicationController
 
     # get all users who haven't submitted their reports
     reviewerAssignments.each do |assignment|
-      report = SubmissionReview.where(submission_id: assignment.submission_id, reviewer_id: assignment.user_id)
+      review = SubmissionReview.where(submission_id: assignment.submission_id, reviewer_id: assignment.user_id)
       # if there is no matching report
-      if report.length == 0
+      if review.length == 0
         user = User.find(assignment.user_id)
         if @lazy_users[user.email] == nil
           @lazy_users[user.email] = 1
