@@ -30,7 +30,7 @@ class SubmissionReviewsController < ApplicationController
     respond_to do |format|
       if @submission_review.save
         submission = Submission.find(@submission_review.submission_id)
-        format.html { redirect_to submission, notice: 'Submission review was successfully created.' }
+        format.html { redirect_to "/", notice: 'Submission review was successfully created.' }
         # format.json { render :show, status: :created, location: @abstract_report }
       else
         format.html { render :new }
