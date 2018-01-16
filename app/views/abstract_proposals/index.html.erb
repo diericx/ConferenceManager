@@ -23,7 +23,7 @@
       <th scop="col"> Innovation score </th>
       <th scop="col"> Breadth score </th>
       <th scop="col"> Quality score </th>
-      <th scop="col"> Recommendation score </th>
+      <th scop="col"> Recommendation </th>
       
       <% if is_admin?(current_user) then %>
         <th scope="col" colspan="3"></th>
@@ -47,7 +47,7 @@
           <th scope="row"><%= @innovation[i] %></th>
           <th scope="row"><%= @breadth[i] %></th>
           <th scope="row"><%= @quality[i] %></th>
-          <th scope="row"><%= @recommendation[i] %></th>
+          <th scope="row"><%= recommendation_options[@recommendation[i]] %></th>
 
           <% if is_admin?(current_user) then %>
             <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
