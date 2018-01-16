@@ -18,7 +18,7 @@ module SubmissionsHelper
                 @quality.push("")
                 @recommendation.push(4)
             end
-            return
+            next
         end
 
         # if the user IS an admin, get the data for all reviews
