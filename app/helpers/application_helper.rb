@@ -1,6 +1,6 @@
 module ApplicationHelper
     def recommendation_options
-        ["Reject", "Poster/Demo", "Lightning-talk", "Full-Talk"]
+        ["Reject", "Poster/Demo", "Lightning-talk", "Full-Talk", "No Reviews"]
     end
 
     def innovation_options

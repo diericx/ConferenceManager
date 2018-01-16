@@ -31,7 +31,7 @@ module AbstractProposalsHelper
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
-          @recommendation.push(0)
+          @recommendation.push(4)
           
           if reviewers.length == 0
             @reviews_percent.push(0)
