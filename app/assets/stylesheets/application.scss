@@ -13,20 +13,4 @@
  */
 @import "bootstrap";
 @import "site";
-@import "datatables";
-
-// table.dataTable thead .sorting {
-//     background-image: "asfadsffas";
-// }
-// table.dataTable thead .sorting_asc {
-//     background-image: image-url("sort_asc.png");
-// }
-// table.dataTable thead .sorting_desc {
-//     background-image: image-url("sort_desc.png");
-// }
-// table.dataTable thead .sorting_asc_disabled {
-//     background-image: image-url("sort_asc_disabled.png");
-// }
-// table.dataTable thead .sorting_desc_disabled {
-//     background-image: image-url("sort_desc_disabled.png");
-// }
+@import "dataTables/jquery.dataTables";
