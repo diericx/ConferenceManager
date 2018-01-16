@@ -77,10 +77,4 @@
   });
 
   $('.dataTables_filter').addClass('pull-left');
-
-  const clickableRows = document.querySelectorAll('[data-behavior=clickable-row]');
-  
-  clickableRows.addEventListener('click', event => {
-    window.location = event.currentTarget.dataset.url;
-  });
 </script>
