@@ -1,5 +1,13 @@
 module SubmissionsHelper
     def get_data_for_each_proposal()
+      # arrays for data for each proposal
+      @reviews_percent = []
+      @assigned_reviewers = []
+      @innovation = []
+      @breadth = []
+      @quality = []
+      @recommendation = []
+
       # Get data for each proposal
       @submissions.each do |submission|
 

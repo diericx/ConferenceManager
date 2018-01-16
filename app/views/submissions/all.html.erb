@@ -1,0 +1,13 @@
+</br>
+
+<div class="center">
+  <% if is_admin?(current_user) then %>
+    <h1>All Submissions</h1>
+  <% else %>
+    <h1>Assigned Submissions</h1>
+  <% end %>
+</div>
+
+</br>
+
+<%= render 'submissions_table', submissions: @submissions %>

@@ -19,6 +19,9 @@
         <ul class="navbar-nav">
           <% if user_signed_in? && is_admin?(current_user) then %>
             <li class="nav-item">
+              <a class="nav-link" href="/submissions/all">All Submissions</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/conferences">Conferences</a>
             </li>
             <li class="nav-item">

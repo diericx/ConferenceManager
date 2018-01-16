@@ -1,81 +1,14 @@
 </br>
 
 <div class="center">
-  <% if is_admin?(current_user) then %>
-    <h1>All Submissions</h1>
-  <% else %>
     <h1>Assigned Submissions</h1>
-  <% end %>
 </div>
 
 </br>
 
-<table id="reviews-table" class="table table-hover table-striped" cellspacing="0" width="100%">
-
-  <thead>
-
-    <tr>
-      <th scope="col">Title</th>
-      <% if is_admin?(current_user) then %>
-        <th scope="col"> reviews </th>
-        <th scope="col"> max reviews </th>
-      <% end %>
-
-      <th scope="col"> Innovation score </th>
-      <th scope="col"> Breadth score </th>
-      <th scope="col"> Quality score </th>
-      <th scope="col"> Recommendation </th>
-      
-      <% if is_admin?(current_user) then %>
-        <th scope="col" colspan="1">  </th>
-        <th scope="col" colspan="1">  </th>
-      <% end %>
-    </tr>
-
-  </thead>
-
-  <tbody>
-    <% i = 0 %>
-    <% @submissions.each do |submission| %>
-        <tr class="row-proposal" onclick="window.location='/submissions/<%= submission.id %>'">
-          <td scope="row"><%= submission.title %></td>
-
-          
-          <% if is_admin?(current_user) then %>
-            <td scope="row"><%= @reviews_percent[i] %>%</td>
-            <td scope="row"><%= @assigned_reviewers[i] %></td>
-          <% end %>  
-
-          <td scope="row"><%= @innovation[i] %></td>
-          <td scope="row"><%= @breadth[i] %></td>
-          <td scope="row"><%= @quality[i] %></td>
-          <td scope="row"><%= recommendation_options_display[@recommendation[i]][0] %></td>
-
-          <% if is_admin?(current_user) then %>
-            <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
-            <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
-          <% end %>
-
-        </tr>
-        <% i += 1 %>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'submissions_table', submissions: @submissions %>
 
 <br>
 <% if is_admin?(current_user) then %>
   <%= link_to 'New Submission', new_submission_path %>
 <% end %>
-
-<script>
-  $(document).ready(function() {
-    $('#reviews-table').DataTable({
-      scrollY: 500,
-      "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">',
-      "iDisplayLength": 25,
-      "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-    });
-  });
-
-  $('.dataTables_filter').addClass('pull-left');
-</script>

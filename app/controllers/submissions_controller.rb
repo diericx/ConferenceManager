@@ -7,27 +7,26 @@ class SubmissionsController < ApplicationController
   # GET /submissions
   # GET /submissions.json
   def index
-    # get proposals for this user
-    @submissions = []
-    # arrays for data for each proposal
-    @reviews_percent = []
-    @assigned_reviewers = []
-    @innovation = []
-    @breadth = []
-    @quality = []
-    @recommendation = []
 
-    if is_admin?(current_user) then
-      @submissions = Submission.all
-    else 
-      current_users_assigned_proposals = ReviewerAssignment.where(user_id: current_user.id).each do |assignment|
-        @submissions.push(Submission.find(assignment.submission_id))
-      end
+    @submissions = []
+
+    current_users_assigned_proposals = ReviewerAssignment.where(user_id: current_user.id).each do |assignment|
+      @submissions.push(Submission.find(assignment.submission_id))
     end
 
     # fills in the data tables for each proposal
     get_data_for_each_proposal()
     
+  end
+
+  # GET /submissions/all
+  # GET /submissions/all.json
+  def all
+    only_admins()
+    # get all submissions
+    @submissions = Submission.all
+    # fills in the data tables for each proposal
+    get_data_for_each_proposal()
   end
 
   # GET /submissions/1
