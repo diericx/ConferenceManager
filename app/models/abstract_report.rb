@@ -1,2 +1,0 @@
-class AbstractReport < ApplicationRecord
-end

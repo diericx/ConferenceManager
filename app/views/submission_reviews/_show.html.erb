@@ -1,0 +1,50 @@
+
+<p>
+  <strong>Conflict of Interest/Not Enough Expertise to Review:</strong>
+  <%= @submission_review.conflict_of_interest %>
+</p>
+<br>
+
+
+
+<p>
+  <strong>Innovation:</strong>
+  <%= innovation_options[@submission_review.innovation] %>
+</p>
+
+<p>
+  <strong>Breadth:</strong>
+  <%= breadth_options[@submission_review.breadth] %>
+</p>
+
+<p>
+  <strong>Presentation Quality:</strong>
+  <%= presentation_quality_options[@submission_review.presentation_quality] %>
+</p>
+
+<p>
+  <strong>Public Content:</strong>
+  <%= @submission_review.public_content %>
+</p>
+
+
+<br>
+<p>
+  <strong>Notes:</strong>
+  <%= @submission_review.notes %>
+</p>
+
+<br>
+
+ <strong>Recommendation:</strong>
+  <%= recommendation_options[@submission_review.recommendation] %>
+</p>
+
+
+
+
+<% if current_user.id == @submission_review.reviewer_id then %>
+  <form action="<%= edit_submission_review_path(@submission_review) %>">
+    <button type="submit" class="btn btn-success">Edit</button>  
+  </form>
+<% end %>

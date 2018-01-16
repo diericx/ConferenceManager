@@ -2,9 +2,9 @@
 
 <div class="center">
   <% if is_admin?(current_user) then %>
-    <h1>All Abstract Proposals</h1>
+    <h1>All Submissions</h1>
   <% else %>
-    <h1>Assigned Abstract Proposals</h1>
+    <h1>Assigned Submissions</h1>
   <% end %>
 </div>
 
@@ -36,9 +36,9 @@
 
   <tbody>
     <% i = 0 %>
-    <% @abstract_proposals.each do |abstract_proposal| %>
-        <tr class="row-proposal" onclick="window.location='/abstract_proposals/<%= abstract_proposal.id%>'">
-          <td scope="row"><%= abstract_proposal.title %></td>
+    <% @submissions.each do |submission| %>
+        <tr class="row-proposal" onclick="window.location='/submissions/<%= submission.id%>'">
+          <td scope="row"><%= submission.title %></td>
 
           
           <% if is_admin?(current_user) then %>
@@ -52,8 +52,8 @@
           <td scope="row"><%= recommendation_options[@recommendation[i]] %></td>
 
           <% if is_admin?(current_user) then %>
-            <td><%= link_to 'Edit', edit_abstract_proposal_path(abstract_proposal) %></td>
-            <td><%= link_to 'Destroy', abstract_proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+            <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
+            <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
           <% end %>
 
         </tr>
@@ -64,7 +64,7 @@
 
 <br>
 <% if is_admin?(current_user) then %>
-  <%= link_to 'New Abstract Proposal', new_abstract_proposal_path %>
+  <%= link_to 'New Submission', new_submission_path %>
 <% end %>
 
 <script>

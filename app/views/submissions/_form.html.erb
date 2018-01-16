@@ -5,13 +5,13 @@
   end
 %>
 
-<%= form_with(model: abstract_proposal, local: true) do |form| %>
-  <% if abstract_proposal.errors.any? %>
+<%= form_with(model: submission, local: true) do |form| %>
+  <% if submission.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(abstract_proposal.errors.count, "error") %> prohibited this abstract_proposal from being saved:</h2>
+      <h2><%= pluralize(submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
       <ul>
-      <% abstract_proposal.errors.full_messages.each do |message| %>
+      <% submission.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, id: :abstract_proposal_title %>
+    <%= form.text_field :title, id: :submission_title %>
   </div>
 
   <div class="field">
@@ -30,27 +30,27 @@
 
   <div class="field">
     <%= form.label :url %>
-    <%= form.text_field :url, id: :abstract_proposal_url %>
+    <%= form.text_field :url, id: :submission_url %>
   </div>
 
   <div class="field">
     <%= form.label :contact_name %>
-    <%= form.text_field :contact_name, id: :abstract_proposal_contact_name %>
+    <%= form.text_field :contact_name, id: :submission_contact_name %>
   </div>
 
   <div class="field">
     <%= form.label :contact_email %>
-    <%= form.text_field :contact_email, id: :abstract_proposal_contact_email %>
+    <%= form.text_field :contact_email, id: :submission_contact_email %>
   </div>
 
   <div class="field">
     <%= form.label :organization %>
-    <%= form.text_field :organization, id: :abstract_proposal_organization %>
+    <%= form.text_field :organization, id: :submission_organization %>
   </div>
 
   <div class="field">
     <%= form.label :proposed_format %>
-    <%= form.text_field :proposed_format, id: :abstract_proposal_proposed_format %>
+    <%= form.text_field :proposed_format, id: :submission_proposed_format %>
   </div>
 
   <div class="actions">

@@ -10,12 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112223257) do
+ActiveRecord::Schema.define(version: 20180116035806) do
 
 # Could not dump table "_users_old_20180112" because of following StandardError
 #   Unknown type 'bool' for column 'admin'
 
-  create_table "abstract_proposals", force: :cascade do |t|
+  create_table "conferences", force: :cascade do |t|
+    t.string "name"
+    t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviewer_assignments", force: :cascade do |t|
+    t.integer "submission_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "submission_reviews", force: :cascade do |t|
+    t.integer "submission_id"
+    t.integer "recommendation"
+    t.integer "innovation"
+    t.integer "breadth"
+    t.integer "presentation_quality"
+    t.boolean "public_content"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reviewer_id"
+    t.boolean "conflict_of_interest"
+  end
+
+  create_table "submissions", force: :cascade do |t|
     t.string "title"
     t.string "url"
     t.integer "conference_id"
@@ -25,34 +53,6 @@ ActiveRecord::Schema.define(version: 20180112223257) do
     t.string "contact_email"
     t.string "organization"
     t.string "proposed_format"
-  end
-
-  create_table "abstract_reports", force: :cascade do |t|
-    t.integer "abstractId"
-    t.integer "recommendation"
-    t.integer "innovation"
-    t.integer "breadth"
-    t.integer "presentationQuality"
-    t.boolean "publicContent"
-    t.string "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "reviewerId"
-    t.boolean "conflictOfInterest"
-  end
-
-  create_table "abstract_reviewer_assignments", force: :cascade do |t|
-    t.integer "abstract_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "conferences", force: :cascade do |t|
-    t.string "name"
-    t.integer "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

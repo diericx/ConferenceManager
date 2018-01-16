@@ -1,0 +1,24 @@
+<%= form_with(model: reviewer_assignment, local: true) do |form| %>
+  <% if reviewer_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reviewer_assignment.errors.count, "error") %> prohibited this reviewer_assignment from being saved:</h2>
+
+      <ul>
+      <% reviewer_assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= form.hidden_field :submission_id, value: submission_id %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

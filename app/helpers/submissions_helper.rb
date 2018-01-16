@@ -1,16 +1,16 @@
-module AbstractProposalsHelper
+module SubmissionsHelper
     def get_data_for_each_proposal()
       # Get data for each proposal
-      @abstract_proposals.each do |abstract|
+      @submissions.each do |submission|
 
         # if the user is not an admin, just get the data for their report
         if is_admin?(current_user) == false
-            review = AbstractReport.where(abstractId: abstract.id, reviewerId: current_user.id)
+            review = SubmissionReview.where(submission_id: submission.id, reviewer_id: current_user.id)
             # if the user has submitted a review
             if review.length > 0
                 @innovation.push(review[0].innovation)
                 @breadth.push(review[0].breadth)
-                @quality.push(review[0].presentationQuality)
+                @quality.push(review[0].presentation_quality)
                 @recommendation.push(review[0].recommendation)
             else
                 @innovation.push("")
@@ -22,8 +22,8 @@ module AbstractProposalsHelper
         end
 
         # if the user IS an admin, get the data for all reviews
-        reviews = AbstractReport.where(:abstractId => abstract.id)
-        reviewers = AbstractReviewerAssignment.where(:abstract_id => abstract.id)
+        reviews = SubmissionReview.where(:submission_id => submission.id)
+        reviewers = ReviewerAssignment.where(:submission_id => submission.id)
 
         @assigned_reviewers.push(reviewers.length)
         if reviews.length == 0
@@ -42,12 +42,12 @@ module AbstractProposalsHelper
           # get data for averages
           i = b = q = r = 0
           reviews.each do |review|
-            if review.conflictOfInterest == true
+            if review.conflict_of_interest == true
               next
             end
             i += review.innovation
             b += review.breadth
-            q += review.presentationQuality
+            q += review.presentation_quality
             r += review.recommendation
           end
 

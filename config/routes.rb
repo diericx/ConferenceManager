@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'abstract_proposals/report'
+  get 'submissions/report'
 
-  resources :abstract_reviewer_assignments
-  resources :abstract_reports
+  resources :reviewer_assignments
+  resources :submission_reviews
   resources :conferences
   devise_for :users
-  resources :abstract_proposals
+  resources :submissions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'abstract_proposals#index'
+  root 'submissions#index'
 end

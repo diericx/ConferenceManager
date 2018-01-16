@@ -1,10 +1,10 @@
-<%= form_with(model: abstract_report, local: true) do |form| %>
-  <% if abstract_report.errors.any? %>
+<%= form_with(model: submission_review, local: true) do |form| %>
+  <% if submission_review.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(abstract_report.errors.count, "error") %> prohibited this abstract_report from being saved:</h2>
+      <h2><%= pluralize(submission_review.errors.count, "error") %> prohibited this submission_review from being saved:</h2>
 
       <ul>
-      <% abstract_report.errors.full_messages.each do |message| %>
+      <% submission_review.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,17 +12,17 @@
   <% end %>
 
   
-  <% if @abstract_proposal != nil then %>
-      <%= form.hidden_field :abstractId, value: @abstract_proposal.id %>
-      <%= form.hidden_field :reviewerId, value: current_user.id %>
+  <% if @submission != nil then %>
+      <%= form.hidden_field :submission_id, value: @submission.id %>
+      <%= form.hidden_field :reviewer_id, value: current_user.id %>
   <% end %>
 
   </br> 
 
   <div class="form-inline">
-    <strong><%= form.label :conflictOfInterest %></strong> &nbsp;&nbsp;&nbsp;
+    <strong><%= form.label :conflict_of_interest %></strong> &nbsp;&nbsp;&nbsp;
     <!-- <strong>Conflict of Interest/Not Enough Expertise to Review  </strong> &nbsp;&nbsp;&nbsp; -->
-    <%= form.check_box :conflictOfInterest %>
+    <%= form.check_box :conflict_of_interest %>
   </div>
 
   </br>
@@ -43,7 +43,7 @@
 
   <div class="form-inline">
     <strong>Presentation Quality</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.select(:presentationQuality, presentation_quality_options, {}, {:class => "form-control"}) %>
+    <%= form.select(:presentation_quality, presentation_quality_options, {}, {:class => "form-control"}) %>
   </div>
 
   </br>
@@ -60,7 +60,7 @@
 
   <div class="form-inline">
     <strong>Content could be presented publically/externally</strong>&nbsp;&nbsp;&nbsp;
-    <%= form.check_box :publicContent %>
+    <%= form.check_box :public_content %>
   </div>
 
 </br>
@@ -78,6 +78,6 @@
   </br>
 
   <div class="actions">
-    <%= form.submit "Submit Report", class: "btn btn-success" %>
+    <%= form.submit "Submit Review", class: "btn btn-success" %>
   </div>
 <% end %>

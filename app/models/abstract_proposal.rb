@@ -1,2 +1,0 @@
-class AbstractProposal < ApplicationRecord
-end

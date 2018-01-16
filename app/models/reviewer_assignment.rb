@@ -1,0 +1,2 @@
+class ReviewerAssignment < ApplicationRecord
+end

@@ -1,2 +1,0 @@
-class AbstractReviewerAssignment < ApplicationRecord
-end
