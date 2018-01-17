@@ -34,18 +34,16 @@ module SubmissionsHelper
         reviewers = ReviewerAssignment.where(:submission_id => submission.id)
 
         @assigned_reviewers.push(reviewers.length)
+
         if reviews.length == 0
           # nothing to calculate
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
           @recommendation.push(4)
-          
-          if reviewers.length == 0
-            @reviews_percent.push(0)
-          end
+          @reviews_percent.push(0)
         else
-          @reviews_percent.push(reviews.length.to_f / reviewers.length.to_f * 100)
+          @reviews_percent.push( (reviews.length.to_f / reviewers.length.to_f) * 100)
 
           # get data for averages
           i = b = q = r = 0
