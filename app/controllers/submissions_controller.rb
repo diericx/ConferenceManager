@@ -114,12 +114,12 @@ class SubmissionsController < ApplicationController
       end
     end
 
-    @submission_counts = [0, 0, 0, 0, 0, 0, 0]
+    @submission_counts = [[], [], [], [], [], [], []]
     # get all submissions with 
     submissions = Submission.all
     submissions.each do |submission|
       reviews = SubmissionReview.where(submission_id: submission.id)
-      @submission_counts[reviews.length] += 1
+      @submission_counts[reviews.length].push(submission)
     end
 
   end

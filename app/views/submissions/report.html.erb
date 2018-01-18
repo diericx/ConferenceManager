@@ -27,7 +27,7 @@
         <% until i < 0 do %>
             <tr>
                 <td><%= i %></td>
-                <td><%= @submission_counts[i] %></td>
+                <td><%= @submission_counts[i].length %></td>
             </tr>
             <% i -= 1 %>
         <% end %>
