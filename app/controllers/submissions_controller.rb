@@ -95,6 +95,7 @@ class SubmissionsController < ApplicationController
   def report
     only_admins()
 
+    # get users who still need to do reviews
     reviewerAssignments = ReviewerAssignment.all
     @lazy_users = Hash.new
 
@@ -111,6 +112,14 @@ class SubmissionsController < ApplicationController
         end
         
       end
+    end
+
+    @submission_counts = [0, 0, 0, 0, 0, 0, 0]
+    # get all submissions with 
+    submissions = Submission.all
+    submissions.each do |submission|
+      reviews = SubmissionReview.where(submission_id: submission.id)
+      @submission_counts[reviews.length] += 1
     end
 
   end

@@ -1,11 +1,35 @@
 </br>
 
 <div class="center">
-      <h1>Admin Report</h1>
-  </div>
+    <h1>Admin Report</h1>
+</div>
 
+<h5> Users who still need to comlete reports</h5>
+<hr>
 <% @lazy_users.each do |key, value| %>
     <div>
         [<%= key %>, <%= value %>]
     </div>
 <% end %>
+
+</br>
+
+<h5> Reports sorted by review completion </h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Reviews Completed</th>
+            <th>Submissions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% i = @submission_counts.length-1 %>
+        <% until i < 0 do %>
+            <tr>
+                <td><%= i %></td>
+                <td><%= @submission_counts[i] %></td>
+            </tr>
+            <% i -= 1 %>
+        <% end %>
+    </tbody>
+</table>
