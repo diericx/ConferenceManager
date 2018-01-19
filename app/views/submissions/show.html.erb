@@ -71,6 +71,7 @@
         <% for reviewer in @reviewers do %>
           <tr>
             <td><%= User.find(reviewer.user_id).email %></td>
+            <td class="align-right"><%= link_to 'Remove', reviewer, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
           </tr>
         <% end %>
       </tbody>
@@ -113,7 +114,3 @@
 <% end %>
 
 </br>
-
-<form action="<%= submissions_path %>">
-  <button type="submit" class="btn btn-primary">Back</button>  
-</form>
