@@ -5,13 +5,14 @@
         <tr>
         <th scope="col">Title</th>
         <% if is_admin?(current_user) then %>
-            <th scope="col"> reviews </th>
-            <th scope="col"> max reviews </th>
+            <th scope="col"> Review Progress </th>
+            <th scope="col"> Completed Reviews </th>
+            <th scope="col"> Max Reviews </th>
         <% end %>
 
-        <th scope="col"> Innovation score </th>
-        <th scope="col"> Breadth score </th>
-        <th scope="col"> Quality score </th>
+        <th scope="col"> Innovation Score </th>
+        <th scope="col"> Breadth Score </th>
+        <th scope="col"> Quality Score </th>
         <th scope="col"> Recommendation </th>
         
         <% if is_admin?(current_user) then %>
@@ -31,6 +32,7 @@
             
             <% if is_admin?(current_user) then %>
                 <td scope="row"><%= @reviews_percent[i] %>%</td>
+                <td scope="row"><%= @reviews_completed[i] %></td>
                 <td scope="row"><%= @assigned_reviewers[i] %></td>
             <% end %>  
 

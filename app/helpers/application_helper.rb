@@ -40,4 +40,15 @@ module ApplicationHelper
             redirect_to "/"
         end
     end
+
+    def average(num1, num2)
+        perc = (num1.to_f / num2.to_f)
+        puts perc
+        return perc.round(2)
+    end
+
+    def to_percent(num1, num2)
+        ((num1.to_f / num2.to_f) * 100).round(2)
+    end
+
 end

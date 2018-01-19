@@ -1,7 +1,9 @@
 module SubmissionsHelper
+    include ApplicationHelper
     def get_data_for_each_proposal()
       # arrays for data for each proposal
       @reviews_percent = []
+      @reviews_completed = []
       @assigned_reviewers = []
       @innovation = []
       @breadth = []
@@ -37,13 +39,15 @@ module SubmissionsHelper
 
         if reviews.length == 0
           # nothing to calculate
+          @reviews_completed.push(0)
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
           @recommendation.push(4)
           @reviews_percent.push(0)
         else
-          @reviews_percent.push( (reviews.length.to_f / reviewers.length.to_f) * 100)
+          @reviews_percent.push(to_percent(reviews.length, reviewers.length))
+          @reviews_completed.push(reviews.length)
 
           # get data for averages
           i = b = q = r = 0
@@ -57,10 +61,10 @@ module SubmissionsHelper
             r += review.recommendation
           end
 
-          @innovation.push(i/reviews.length)
-          @breadth.push(b/reviews.length)
-          @quality.push(q/reviews.length)
-          @recommendation.push(r/reviews.length)
+          @innovation.push( average(i, reviews.length) )
+          @breadth.push( average(b, reviews.length) )
+          @quality.push( average(q, reviews.length) )
+          @recommendation.push( average(r, reviews.length) )
         end
 
       end
