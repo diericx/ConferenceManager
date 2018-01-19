@@ -11,12 +11,10 @@ class SubmissionsController < ApplicationController
     @submissions = []
     @should_show_admin_data = false
 
-    current_users_assigned_proposals = ReviewerAssignment.where(user_id: current_user.id).each do |assignment|
-      @submissions.push(Submission.find(assignment.submission_id))
-    end
+    get_submissions_assigned_to(current_user.id, @submissions)
 
     # fills in the data tables for each proposal
-    get_data_for_each_proposal()
+    get_data_for_each_proposal(false)
     
   end
 
@@ -28,7 +26,7 @@ class SubmissionsController < ApplicationController
     # get all submissions
     @submissions = Submission.all
     # fills in the data tables for each proposal
-    get_data_for_each_proposal()
+    get_data_for_each_proposal(true)
   end
 
   # GET /submissions/1
@@ -110,14 +108,17 @@ class SubmissionsController < ApplicationController
 
       # add to total reviewerAssignment count
       if @lazy_users[user.email] == nil
-        @lazy_users[user.email] = [0, 1]
+        @lazy_users[user.email] = Hash.new
+        @lazy_users[user.email]["completed"] = 0 
+        @lazy_users[user.email]["assigned"] = 1
+        @lazy_users[user.email]["user_id"] = user.id 
       else
-        @lazy_users[user.email][1] += 1
+        @lazy_users[user.email]["assigned"] += 1
       end
 
       # add to completed reviews
       if review.length != 0
-          @lazy_users[user.email][0] += 1
+          @lazy_users[user.email]["completed"] += 1
       end
     end
 
@@ -132,7 +133,10 @@ class SubmissionsController < ApplicationController
   end
 
   def user_report
-
+    @submissions = []
+    get_submissions_assigned_to(params[:user_id], @submissions)
+    # fills in the data tables for each proposal
+    get_data_for_each_proposal(false)
   end
 
   private
@@ -144,5 +148,11 @@ class SubmissionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
       params.require(:submission).permit(:title, :url, :contact_name, :contact_email, :organization, :proposed_format, :conference_id)
+    end
+
+    def get_submissions_assigned_to(user_id, array)
+      ReviewerAssignment.where(user_id: user_id).each do |assignment|
+        array.push(Submission.find(assignment.submission_id))
+      end
     end
 end

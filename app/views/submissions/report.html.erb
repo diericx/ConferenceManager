@@ -30,7 +30,7 @@
 <hr>
 <% @lazy_users.each do |key, value| %>
     <div>
-        [<%= key %>, <%= value[0] %>, <%= (value[0].to_f/value[1].to_f) * 100 %>%]
+        [<%= key %>, <%= value["completed"] %>, <%= link_to to_percent(value["completed"], value["assigned"]).to_s + "%", {:controller => "submissions", :action => "user_report", :user_id => value["user_id"], :user_email => key } %>]
     </div>
 <% end %>
 
