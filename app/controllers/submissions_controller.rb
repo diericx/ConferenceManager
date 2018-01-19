@@ -97,20 +97,25 @@ class SubmissionsController < ApplicationController
 
     # get users who still need to do reviews
     reviewerAssignments = ReviewerAssignment.all
+
+    # [reviews completed, total assigned reviews]
     @lazy_users = Hash.new
 
-    # get all users who haven't submitted their reports
+    # get all users who haven't submitted their reviews
     reviewerAssignments.each do |assignment|
       review = SubmissionReview.where(submission_id: assignment.submission_id, reviewer_id: assignment.user_id)
-      # if there is no matching report
-      if review.length == 0
-        user = User.find(assignment.user_id)
-        if @lazy_users[user.email] == nil
-          @lazy_users[user.email] = 1
-        else
-          @lazy_users[user.email] += 1
-        end
-        
+      user = User.find(assignment.user_id)
+
+      # add to total reviewerAssignment count
+      if @lazy_users[user.email] == nil
+        @lazy_users[user.email] = [0, 1]
+      else
+        @lazy_users[user.email][1] += 1
+      end
+
+      # add to completed reviews
+      if review.length != 0
+          @lazy_users[user.email][0] += 1
       end
     end
 

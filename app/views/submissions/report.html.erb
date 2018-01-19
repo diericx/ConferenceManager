@@ -4,16 +4,6 @@
     <h1>Admin Report</h1>
 </div>
 
-<h5> Users who still need to comlete reports</h5>
-<hr>
-<% @lazy_users.each do |key, value| %>
-    <div>
-        [<%= key %>, <%= value %>]
-    </div>
-<% end %>
-
-</br>
-
 <h5> Reports sorted by review completion </h5>
 <table class="table">
     <thead>
@@ -33,3 +23,15 @@
         <% end %>
     </tbody>
 </table>
+
+</br>
+
+<h5> Users who still need to complete reports</h5>
+<hr>
+<% @lazy_users.each do |key, value| %>
+    <div>
+        [<%= key %>, <%= value[0] %>, <%= (value[0].to_f/value[1].to_f) * 100 %>%]
+    </div>
+<% end %>
+
+
