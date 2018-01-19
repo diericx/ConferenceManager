@@ -9,6 +9,7 @@ class SubmissionsController < ApplicationController
   def index
 
     @submissions = []
+    @should_show_admin_data = false
 
     current_users_assigned_proposals = ReviewerAssignment.where(user_id: current_user.id).each do |assignment|
       @submissions.push(Submission.find(assignment.submission_id))
@@ -23,6 +24,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions/all.json
   def all
     only_admins()
+    @should_show_admin_data = true
     # get all submissions
     @submissions = Submission.all
     # fills in the data tables for each proposal
@@ -126,6 +128,10 @@ class SubmissionsController < ApplicationController
       reviews = SubmissionReview.where(submission_id: submission.id)
       @submission_counts[reviews.length].push(submission)
     end
+
+  end
+
+  def user_report
 
   end
 

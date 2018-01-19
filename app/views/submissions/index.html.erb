@@ -6,9 +6,6 @@
 
 </br>
 
-<%= render 'submissions_table', submissions: @submissions %>
+<%= render 'submissions_table' %>
 
 <br>
-<% if is_admin?(current_user) then %>
-  <%= link_to 'New Submission', new_submission_path %>
-<% end %>

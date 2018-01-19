@@ -4,7 +4,7 @@
 
         <tr>
         <th scope="col">Title</th>
-        <% if is_admin?(current_user) then %>
+        <% if is_admin?(current_user) && @should_show_admin_data then %>
             <th scope="col"> Review Progress </th>
             <th scope="col"> Completed Reviews </th>
             <th scope="col"> Max Reviews </th>
@@ -15,7 +15,7 @@
         <th scope="col"> Quality Score </th>
         <th scope="col"> Recommendation </th>
         
-        <% if is_admin?(current_user) then %>
+        <% if is_admin?(current_user) && @should_show_admin_data then %>
             <th scope="col" colspan="1">  </th>
             <th scope="col" colspan="1">  </th>
         <% end %>
@@ -30,7 +30,7 @@
             <td scope="row"><%= submission.title %></td>
 
             
-            <% if is_admin?(current_user) then %>
+            <% if is_admin?(current_user) && @should_show_admin_data then %>
                 <td scope="row"><%= @reviews_percent[i] %>%</td>
                 <td scope="row"><%= @reviews_completed[i] %></td>
                 <td scope="row"><%= @assigned_reviewers[i] %></td>
@@ -41,7 +41,7 @@
             <td scope="row"><%= @quality[i] %></td>
             <td scope="row"><%= recommendation_options_display[@recommendation[i]][0] %></td>
 
-            <% if is_admin?(current_user) then %>
+            <% if is_admin?(current_user) && @should_show_admin_data then %>
                 <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
                 <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
             <% end %>

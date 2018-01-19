@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'submissions/report'
   get 'submissions/all'
+  get 'submissions/user_report'
 
   resources :reviewer_assignments
   resources :submission_reviews
