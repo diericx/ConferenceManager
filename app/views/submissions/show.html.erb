@@ -46,7 +46,7 @@
 
   <% if is_admin?(current_user) %>
     <form action="<%= edit_submission_path(@submission) %>">
-      <button type="submit" class="btn btn-success">Edit</button>  
+      <button type="submit" class="btn btn-outline-success">Edit</button>  
     </form>
   <% end %>
 
@@ -71,7 +71,7 @@
         <% for reviewer in @reviewers do %>
           <tr>
             <td><%= User.find(reviewer.user_id).email %></td>
-            <td class="align-right"><%= link_to 'Remove', reviewer, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+            <td class="align-right"><%= button_to 'Remove Reviewer', reviewer, class: "btn btn-sm btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>  
           </tr>
         <% end %>
       </tbody>
