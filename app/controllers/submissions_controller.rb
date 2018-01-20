@@ -123,6 +123,15 @@ class SubmissionsController < ApplicationController
     end
 
     @submission_counts = [[], [], [], [], [], [], []]
+    @review_percents = [[], [], [], [], [], [], []]
+
+    # get percentages for every user and add user_id to array
+    @lazy_users.each do |key, review_data|
+      perc = to_percent(review_data["completed"], review_data["assigned"])
+      tier = get_tier_from_percentage(perc)
+      @review_percents[tier].push(review_data["user_id"])
+    end
+
     # get all submissions with 
     submissions = Submission.all
     submissions.each do |submission|

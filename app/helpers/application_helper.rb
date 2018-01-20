@@ -27,6 +27,10 @@ module ApplicationHelper
         [["True", true], ["False", false]]
     end
 
+    def progress_labels
+        ["0%", "1-19%", "20-39%", "40-59%", "60-79%", "80-99%", "100%"]
+    end
+
     def is_admin?(user)
         if user.admin != nil && user.admin > 0
             return true

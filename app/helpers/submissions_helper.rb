@@ -69,4 +69,23 @@ module SubmissionsHelper
 
       end
     end
+
+    def get_tier_from_percentage(perc)
+      case
+        when perc == 0.0
+          return 0
+        when perc >= 1.0 && perc <= 19.0
+          return 1
+        when perc >= 20.0 && perc <= 39.0
+          return 2
+        when perc >= 40.0 && perc <= 59.0
+          return 3
+        when perc >= 60 && perc <= 79
+          return 4
+        when perc >= 80 && perc <= 99
+          return 5
+        when perc == 100
+          return 6
+      end
+    end
 end

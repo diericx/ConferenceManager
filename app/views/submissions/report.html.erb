@@ -4,25 +4,57 @@
     <h1>Admin Report</h1>
 </div>
 
+</br>
 <h5> Reports sorted by review completion </h5>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Reviews Completed</th>
-            <th>Submissions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% i = @submission_counts.length-1 %>
-        <% until i < 0 do %>
+</br>
+
+<div class="boxed">
+    <table class="table">
+        <thead>
             <tr>
-                <td><%= i %></td>
-                <td><%= @submission_counts[i].length %></td>
+                <th>Reviews Completed</th>
+                <th>Submissions</th>
             </tr>
-            <% i -= 1 %>
-        <% end %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% i = @submission_counts.length-1 %>
+            <% until i < 0 do %>
+                <tr>
+                    <td><%= i %></td>
+                    <td><%= @submission_counts[i].length %></td>
+                </tr>
+                <% i -= 1 %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+</br>
+
+</br>
+<h5> User Review Completion </h5>
+</br>
+
+<div class="boxed">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Progress</th>
+                    <th>User Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% i = @review_percents.length-1 %>
+                <% until i < 0 do %>
+                    <tr>
+                        <td><%= progress_labels[i] %></td>
+                        <td><%= @review_percents[i].length %></td>
+                    </tr>
+                    <% i -= 1 %>
+                <% end %>
+            </tbody>
+        </table>
+</div>
 
 </br>
 
@@ -34,4 +66,6 @@
     </div>
 <% end %>
 
-
+</br>
+</br>
+</br>
