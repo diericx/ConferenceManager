@@ -10,9 +10,9 @@
             <th scope="col"> Max Reviews </th>
         <% end %>
 
-        <th scope="col"> Innovation Score </th>
-        <th scope="col"> Breadth Score </th>
-        <th scope="col"> Quality Score </th>
+        <th scope="col"> Innovation </th>
+        <th scope="col"> Breadth </th>
+        <th scope="col"> Quality </th>
         <th scope="col"> Recommendation </th>
         
         <% if is_admin?(current_user) && @should_show_admin_data then %>
@@ -39,7 +39,7 @@
             <td scope="row"><%= @innovation[i] %></td>
             <td scope="row"><%= @breadth[i] %></td>
             <td scope="row"><%= @quality[i] %></td>
-            <td scope="row"><%= recommendation_options_display[@recommendation[i]][0] %></td>
+            <td scope="row"><%= @recommendation[i] %></td>
 
             <% if is_admin?(current_user) && @should_show_admin_data then %>
                 <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
