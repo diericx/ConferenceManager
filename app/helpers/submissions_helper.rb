@@ -4,6 +4,7 @@ module SubmissionsHelper
       # arrays for data for each proposal
       @reviews_percent = []
       @reviews_completed = []
+      @conflict_of_interest = []
       @assigned_reviewers = []
       @innovation = []
       @breadth = []
@@ -18,11 +19,13 @@ module SubmissionsHelper
             review = SubmissionReview.where(submission_id: submission.id, reviewer_id: current_user.id)
             # if the user has submitted a review
             if review.length > 0
+                @conflict_of_interest.push(review[0].conflict_of_interest)
                 @innovation.push(review[0].innovation)
                 @breadth.push(review[0].breadth)
                 @quality.push(review[0].presentation_quality)
                 @recommendation.push(review[0].recommendation)
             else
+                @conflict_of_interest.push("")
                 @innovation.push("")
                 @breadth.push("")
                 @quality.push("")
@@ -40,6 +43,7 @@ module SubmissionsHelper
         if reviews.length == 0
           # nothing to calculate
           @reviews_completed.push(0)
+          @conflict_of_interest.push("")
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
@@ -50,7 +54,7 @@ module SubmissionsHelper
           @reviews_completed.push(reviews.length)
 
           # get data for averages
-          i = b = q = r = 0
+          i = b = q = r = c = 0
           reviews.each do |review|
             if review.conflict_of_interest == true
               next
