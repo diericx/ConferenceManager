@@ -34,6 +34,7 @@ class SubmissionsController < ApplicationController
   def show
     # Review this user has submitted
     @user_submitted_review = SubmissionReview.where('(submission_id= ? AND reviewer_id= ?)', @submission.id, current_user.id)
+    
     # Users assigned to review this report
     @reviewers = ReviewerAssignment.where(submission_id: @submission.id)
     @submission_reviews = SubmissionReview.where(submission_id: @submission.id)
@@ -41,10 +42,21 @@ class SubmissionsController < ApplicationController
       puts review.reviewer_email
       review.reviewer_email = User.find(review.reviewer_id).name
     end
-    # potential new report
+
+    # potential new review
     @submission_review = SubmissionReview.new
+    
+    # get final decision or create new review for it
+    final_decision_reviews = SubmissionReview.where(submission_id: @submission.id, final: true)
+    if final_decision_reviews.length == 0
+      @final_decision_submission_review = SubmissionReview.new
+    else
+      @final_decision_submission_review = final_decision_reviews[0]
+    end
+
     # Get conference name for this Submission
     @conference_name = Conference.find(@submission.conference_id).name
+
     # get data for submission
     @submissions = [@submission]
     get_data_for_each_proposal(current_user.id, @submissions, true)

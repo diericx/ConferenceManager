@@ -70,6 +70,6 @@ class SubmissionReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_review_params
-      params.require(:submission_review).permit(:submission_id, :reviewer_id, :recommendation, :innovation, :breadth, :presentation_quality, :public_content, :conflict_of_interest, :notes)
+      params.require(:submission_review).permit(:submission_id, :reviewer_id, :recommendation, :innovation, :breadth, :presentation_quality, :public_content, :conflict_of_interest, :notes, :final)
     end
 end

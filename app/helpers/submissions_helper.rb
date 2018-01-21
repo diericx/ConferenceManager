@@ -9,6 +9,7 @@ module SubmissionsHelper
       @breadth = []
       @quality = []
       @recommendation = []
+      @final_decisions = []
 
       # Get data for each proposal
       submissions.each do |submission|
@@ -32,10 +33,18 @@ module SubmissionsHelper
         end
 
         # if the user IS an admin, get the data for all reviews
-        reviews = SubmissionReview.where(:submission_id => submission.id)
-        reviewers = ReviewerAssignment.where(:submission_id => submission.id)
-
+        reviews = SubmissionReview.where(submission_id: submission.id, final: false)
+        final_reviews = SubmissionReview.where(submission_id: submission.id, final: true)
+        reviewers = ReviewerAssignment.where(submission_id: submission.id)
+        
         @assigned_reviewers.push(reviewers.length)
+
+        if final_reviews.length == 0
+          @final_decisions.push("No Decision")
+        else
+          final_review = final_reviews[0]
+          @final_decisions.push(recommendation_options_choice[final_review.recommendation][0])
+        end
 
         if reviews.length == 0
           # nothing to calculate

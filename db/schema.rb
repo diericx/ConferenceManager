@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116035806) do
+ActiveRecord::Schema.define(version: 20180121195714) do
 
 # Could not dump table "_users_old_20180112" because of following StandardError
 #   Unknown type 'bool' for column 'admin'
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180116035806) do
     t.datetime "updated_at", null: false
     t.integer "reviewer_id"
     t.boolean "conflict_of_interest"
+    t.boolean "final", default: false
   end
 
   create_table "submissions", force: :cascade do |t|

@@ -15,6 +15,7 @@
   <% if @submission != nil then %>
       <%= form.hidden_field :submission_id, value: @submission.id %>
       <%= form.hidden_field :reviewer_id, value: current_user.id %>
+      <%= form.hidden_field :final, value: is_final %>
   <% end %>
 
   <table class="table">
@@ -55,7 +56,11 @@
 
   <div class="center">
     <div class="actions">
-      <%= form.submit "Submit Review", class: "btn btn-success" %>
+      <% if is_final %>
+        <%= form.submit "Submit Final Decision", class: "btn btn-success" %>
+      <% else %>
+        <%= form.submit "Submit Review", class: "btn btn-success" %>
+      <% end %>
     </div>
   </div>
 <% end %>
