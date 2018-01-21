@@ -1,6 +1,6 @@
 module SubmissionsHelper
     include ApplicationHelper
-    def get_data_for_each_proposal(report_user_id,is_admin)
+    def get_data_for_each_proposal(report_user_id, submissions, is_admin)
       # arrays for data for each proposal
       @reviews_percent = []
       @reviews_completed = []
@@ -11,7 +11,7 @@ module SubmissionsHelper
       @recommendation = []
 
       # Get data for each proposal
-      @submissions.each do |submission|
+      submissions.each do |submission|
 
         # if the user is not an admin, just get the data for their report
         if is_admin == false

@@ -14,7 +14,7 @@ class SubmissionsController < ApplicationController
     get_submissions_assigned_to(current_user.id, @submissions)
 
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(current_user.id, false)
+    get_data_for_each_proposal(current_user.id, @submissions, false)
     
   end
 
@@ -26,7 +26,7 @@ class SubmissionsController < ApplicationController
     # get all submissions
     @submissions = Submission.all
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(current_user.id,true)
+    get_data_for_each_proposal(current_user.id, @submissions, true)
   end
 
   # GET /submissions/1
@@ -45,6 +45,9 @@ class SubmissionsController < ApplicationController
     @submission_review = SubmissionReview.new
     # Get conference name for this Submission
     @conference_name = Conference.find(@submission.conference_id).name
+    # get data for submission
+    @submissions = [@submission]
+    get_data_for_each_proposal(current_user.id, @submissions, true)
   end
 
   # GET /submissions/new
@@ -150,7 +153,7 @@ class SubmissionsController < ApplicationController
     @submissions = []
     get_submissions_assigned_to(params[:report_user_id], @submissions)
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(params[:report_user_id],false)
+    get_data_for_each_proposal(params[:report_user_id], @submissions, false)
   end
 
   private
