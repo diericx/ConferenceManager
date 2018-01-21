@@ -115,11 +115,16 @@ class SubmissionsController < ApplicationController
   def report
     only_admins()
 
-    # get users who still need to do reviews
+    # get table data
     reviewerAssignments = ReviewerAssignment.all
+    submissions = Submission.all
 
+    # data collection
     # [reviews completed, total assigned reviews]
     @lazy_users = Hash.new
+    @submission_counts = [[], [], [], [], [], [], []]
+    @review_percents = [[], [], [], [], [], [], []]
+    @final_decision_counts = [[], [], [], []]
 
     # get all users who haven't submitted their reviews
     reviewerAssignments.each do |assignment|
@@ -142,9 +147,6 @@ class SubmissionsController < ApplicationController
       end
     end
 
-    @submission_counts = [[], [], [], [], [], [], []]
-    @review_percents = [[], [], [], [], [], [], []]
-
     # get percentages for every user and add user_id to array
     @lazy_users.each do |key, review_data|
       perc = to_percent(review_data["completed"], review_data["assigned"])
@@ -152,11 +154,16 @@ class SubmissionsController < ApplicationController
       @review_percents[tier].push(review_data["user_id"])
     end
 
-    # get all submissions with 
-    submissions = Submission.all
+    # get all submission review data 
     submissions.each do |submission|
       reviews = SubmissionReview.where(submission_id: submission.id)
+      final_reviews = SubmissionReview.where(submission_id: submission.id, final: true)
       @submission_counts[reviews.length].push(submission)
+      # add all final reviews to count
+      if final_reviews.length > 0
+        review = final_reviews[0]
+        @final_decision_counts[review.recommendation].push(review)
+      end
     end
 
   end
@@ -166,6 +173,24 @@ class SubmissionsController < ApplicationController
     get_submissions_assigned_to(params[:report_user_id], @submissions)
     # fills in the data tables for each proposal
     get_data_for_each_proposal(params[:report_user_id], @submissions, false)
+  end
+
+  def final_decisions_report
+    @final_decision_reviews = []
+    params[:final_decision_reviews].each do |review_id|
+      submission_review = SubmissionReview.find(review_id)
+      submission_review.submission = Submission.find(submission_review.submission_id)
+      submission_review.submission.reviewers = []
+      # add reviewers emails
+      reviews = SubmissionReview.where(submission_id: submission_review.submission.id)
+      reviews.each do |review|
+        reviewer = User.find(review.reviewer_id)
+        submission_review.submission.reviewers.push(reviewer.email)
+      end
+      submission_review.submission.reviewers = submission_review.submission.reviewers.uniq
+
+      @final_decision_reviews.push(submission_review)
+    end
   end
 
   private

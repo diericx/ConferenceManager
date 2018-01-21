@@ -58,6 +58,35 @@
 
 </br>
 
+</br>
+<h5> Final Decisions </h5>
+</br>
+
+<div class="boxed">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Decision</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% i = @final_decision_counts.length-1 %>
+                <% until i < 0 do %>
+                    <tr>
+                        <td><%= recommendation_options_choice[i][0] %></td>
+                        <td>
+                            <%= link_to @final_decision_counts[i].length, {:controller => "submissions", :action => "final_decisions_report", :recommendation => recommendation_options_choice[i][0], :final_decision_reviews => @final_decision_counts[i] } %>
+                        </td>
+                    </tr>
+                    <% i -= 1 %>
+                <% end %>
+            </tbody>
+        </table>
+</div>
+
+</br>
+
 <h5> Users who still need to complete reports</h5>
 <hr>
 [email, reviews remaining, %complete]
