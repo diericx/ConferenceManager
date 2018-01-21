@@ -14,7 +14,7 @@ class SubmissionsController < ApplicationController
     get_submissions_assigned_to(current_user.id, @submissions)
 
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(false)
+    get_data_for_each_proposal(current_user.id, false)
     
   end
 
@@ -26,7 +26,7 @@ class SubmissionsController < ApplicationController
     # get all submissions
     @submissions = Submission.all
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(true)
+    get_data_for_each_proposal(current_user.id,true)
   end
 
   # GET /submissions/1
@@ -143,9 +143,9 @@ class SubmissionsController < ApplicationController
 
   def user_report
     @submissions = []
-    get_submissions_assigned_to(params[:user_id], @submissions)
+    get_submissions_assigned_to(params[:report_user_id], @submissions)
     # fills in the data tables for each proposal
-    get_data_for_each_proposal(false)
+    get_data_for_each_proposal(params[:report_user_id],false)
   end
 
   private
@@ -159,8 +159,8 @@ class SubmissionsController < ApplicationController
       params.require(:submission).permit(:title, :url, :contact_name, :contact_email, :organization, :proposed_format, :conference_id)
     end
 
-    def get_submissions_assigned_to(user_id, array)
-      ReviewerAssignment.where(user_id: user_id).each do |assignment|
+    def get_submissions_assigned_to(report_user_id, array)
+      ReviewerAssignment.where(user_id: report_user_id).each do |assignment|
         array.push(Submission.find(assignment.submission_id))
       end
     end

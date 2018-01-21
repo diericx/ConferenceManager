@@ -9,10 +9,11 @@
             <th scope="col"> Completed Reviews </th>
             <th scope="col"> Max Reviews </th>
         <% end %>
-        <th scope="col"> Conflict </th>
+
         <th scope="col"> Innovation </th>
         <th scope="col"> Breadth </th>
         <th scope="col"> Quality </th>
+        <th scope="col"> Rec. Score </th>
         <th scope="col"> Recommendation </th>
         
         <% if is_admin?(current_user) && @should_show_admin_data then %>
@@ -36,11 +37,12 @@
                 <td scope="row"><%= @assigned_reviewers[i] %></td>
             <% end %>  
 
-            <td scope="row"><%= @conflict_of_interest[i] %></td>
             <td scope="row"><%= @innovation[i] %></td>
             <td scope="row"><%= @breadth[i] %></td>
             <td scope="row"><%= @quality[i] %></td>
             <td scope="row"><%= @recommendation[i] %></td>
+            <td scope="row"><%= recommendation_options_display[(@recommendation[i]+0.5)][0] %></td>
+
 
             <% if is_admin?(current_user) && @should_show_admin_data then %>
                 <td><%= link_to 'Edit', edit_submission_path(submission) %></td>

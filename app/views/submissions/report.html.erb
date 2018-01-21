@@ -60,9 +60,10 @@
 
 <h5> Users who still need to complete reports</h5>
 <hr>
+[email, reviews remaining, %complete]
 <% @lazy_users.each do |key, value| %>
     <div>
-        [<%= key %>, <%= value["completed"] %>, <%= link_to to_percent(value["completed"], value["assigned"]).to_s + "%", {:controller => "submissions", :action => "user_report", :user_id => value["user_id"], :user_email => key } %>]
+        [<%= key %>, <%= (value["assigned"]-value["completed"]) %> reviews left, <%= link_to to_percent(value["completed"], value["assigned"]).to_s + "%", {:controller => "submissions", :action => "user_report", :report_user_id => value["user_id"], :user_email => key } %> complete]
     </div>
 <% end %>
 

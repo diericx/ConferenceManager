@@ -1,10 +1,9 @@
 module SubmissionsHelper
     include ApplicationHelper
-    def get_data_for_each_proposal(is_admin)
+    def get_data_for_each_proposal(report_user_id,is_admin)
       # arrays for data for each proposal
       @reviews_percent = []
       @reviews_completed = []
-      @conflict_of_interest = []
       @assigned_reviewers = []
       @innovation = []
       @breadth = []
@@ -16,16 +15,14 @@ module SubmissionsHelper
 
         # if the user is not an admin, just get the data for their report
         if is_admin == false
-            review = SubmissionReview.where(submission_id: submission.id, reviewer_id: current_user.id)
+            review = SubmissionReview.where(submission_id: submission.id, reviewer_id: report_user_id)
             # if the user has submitted a review
             if review.length > 0
-                @conflict_of_interest.push(review[0].conflict_of_interest)
                 @innovation.push(review[0].innovation)
                 @breadth.push(review[0].breadth)
                 @quality.push(review[0].presentation_quality)
                 @recommendation.push(review[0].recommendation)
             else
-                @conflict_of_interest.push("")
                 @innovation.push("")
                 @breadth.push("")
                 @quality.push("")
@@ -43,7 +40,6 @@ module SubmissionsHelper
         if reviews.length == 0
           # nothing to calculate
           @reviews_completed.push(0)
-          @conflict_of_interest.push("")
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
@@ -54,7 +50,7 @@ module SubmissionsHelper
           @reviews_completed.push(reviews.length)
 
           # get data for averages
-          i = b = q = r = c = 0
+          i = b = q = r = 0
           reviews.each do |review|
             if review.conflict_of_interest == true
               next
@@ -78,15 +74,15 @@ module SubmissionsHelper
       case
         when perc == 0.0
           return 0
-        when perc >= 1.0 && perc <= 19.0
+        when perc > 0.0 && perc < 20.0
           return 1
-        when perc >= 20.0 && perc <= 39.0
+        when perc >= 20.0 && perc < 40.0
           return 2
-        when perc >= 40.0 && perc <= 59.0
+        when perc >= 40.0 && perc < 60.0
           return 3
-        when perc >= 60 && perc <= 79
+        when perc >= 60.0 && perc < 80.0
           return 4
-        when perc >= 80 && perc <= 99
+        when perc >= 80.0 && perc < 100.0
           return 5
         when perc == 100
           return 6
