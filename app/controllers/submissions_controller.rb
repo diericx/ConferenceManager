@@ -36,6 +36,11 @@ class SubmissionsController < ApplicationController
     @user_submitted_review = SubmissionReview.where('(submission_id= ? AND reviewer_id= ?)', @submission.id, current_user.id)
     # Users assigned to review this report
     @reviewers = ReviewerAssignment.where(submission_id: @submission.id)
+    @submission_reviews = SubmissionReview.where(submission_id: @submission.id)
+    @submission_reviews.each do |review|
+      puts review.reviewer_email
+      review.reviewer_email = User.find(review.reviewer_id).name
+    end
     # potential new report
     @submission_review = SubmissionReview.new
     # Get conference name for this Submission
