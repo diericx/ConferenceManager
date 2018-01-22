@@ -158,7 +158,9 @@ class SubmissionsController < ApplicationController
     submissions.each do |submission|
       reviews = SubmissionReview.where(submission_id: submission.id)
       final_reviews = SubmissionReview.where(submission_id: submission.id, final: true)
-      @submission_counts[reviews.length].push(submission)
+      if (@submission_counts[reviews.length])
+        @submission_counts[reviews.length].push(submission)
+      end
       # add all final reviews to count
       if final_reviews.length > 0
         review = final_reviews[0]
