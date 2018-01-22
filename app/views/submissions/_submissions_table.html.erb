@@ -42,8 +42,11 @@
             <td scope="row"><%= @breadth[i] %></td>
             <td scope="row"><%= @quality[i] %></td>
             <td scope="row"><%= @recommendation[i] %></td>
-            <td scope="row"><%= recommendation_options_display[(@recommendation[i]+0.5)][0] %></td>
-
+            <% if @reviews_completed[i] == 0 %>
+                <td scope="row"><%= recommendation_options_display[4][0] %></td>
+            <% else %>
+                <td scope="row"><%= recommendation_options_display[(@recommendation[i]+0.5)][0] %></td>
+            <% end %>
 
             <% if is_admin?(current_user) && @should_show_admin_data then %>
                 <td scope="row"><%= @final_decisions[i] %></td>

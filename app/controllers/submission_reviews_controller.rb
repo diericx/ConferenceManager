@@ -30,8 +30,11 @@ class SubmissionReviewsController < ApplicationController
     respond_to do |format|
       if @submission_review.save
         submission = Submission.find(@submission_review.submission_id)
-        format.html { redirect_to "/", notice: 'Submission review was successfully created.' }
-        # format.json { render :show, status: :created, location: @abstract_report }
+        if @submission_review.final
+          format.html { redirect_to "/submissions/all", notice: 'Submission review was successfully updated.' }
+        else
+          format.html { redirect_to "/", notice: 'Submission review was successfully updated.' }
+        end        # format.json { render :show, status: :created, location: @abstract_report }
       else
         format.html { render :new }
         format.json { render json: @submission_review.errors, status: :unprocessable_entity }
@@ -44,7 +47,11 @@ class SubmissionReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @submission_review.update(submission_review_params)
-        format.html { redirect_to "/", notice: 'Submission review was successfully updated.' }
+        if @submission_review.final
+          format.html { redirect_to "/submissions/all", notice: 'Submission review was successfully updated.' }
+        else
+          format.html { redirect_to "/", notice: 'Submission review was successfully updated.' }
+        end
       else
         format.html { render :edit }
         format.json { render json: @submission_review.errors, status: :unprocessable_entity }

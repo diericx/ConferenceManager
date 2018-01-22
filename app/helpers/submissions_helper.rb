@@ -33,7 +33,7 @@ module SubmissionsHelper
         end
 
         # if the user IS an admin, get the data for all reviews
-        reviews = SubmissionReview.where(submission_id: submission.id, final: false)
+        reviews = SubmissionReview.where(submission_id: submission.id, conflict_of_interest: false, final: false)
         final_reviews = SubmissionReview.where(submission_id: submission.id, final: true)
         reviewers = ReviewerAssignment.where(submission_id: submission.id)
         
@@ -52,7 +52,7 @@ module SubmissionsHelper
           @innovation.push(0)
           @breadth.push(0)
           @quality.push(0)
-          @recommendation.push(4)
+          @recommendation.push(0)
           @reviews_percent.push(0)
         else
           @reviews_percent.push(to_percent(reviews.length, reviewers.length))
@@ -61,7 +61,7 @@ module SubmissionsHelper
           # get data for averages
           i = b = q = r = 0
           reviews.each do |review|
-            if review.conflict_of_interest == true
+            if review.conflict_of_interest == true || review.final
               next
             end
             i += review.innovation

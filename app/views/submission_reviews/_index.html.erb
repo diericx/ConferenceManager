@@ -4,11 +4,13 @@
     <tr>
       <th>User</th>
       <th>Conflict</th>
-      <th>Recommendation</th>
+      <th>Public</th>
       <th>Innovation</th>
       <th>Breadth</th>
-      <th>Presentationquality</th>
-      <th>Publiccontent</th>
+      <th>Quality</th>
+      <th>Rec. Score</th>
+      <th>Recommendation</th>
+      
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,11 +20,12 @@
       <tr>
         <td><%= submission_review.reviewer_email %></td>
         <td><%= submission_review.conflict_of_interest %></td>
-        <td><%= submission_review.recommendation %></td>
+        <td><%= submission_review.public_content %></td>
         <td><%= submission_review.innovation %></td>
         <td><%= submission_review.breadth %></td>
         <td><%= submission_review.presentation_quality %></td>
-        <td><%= submission_review.public_content %></td>
+        <td><%= submission_review.recommendation %></td>
+        <td><%= recommendation_options_choice[submission_review.recommendation][0] %></td>
         <td><% link_to 'Show', submission_review %></td>
         <td><% link_to 'Edit', edit_submission_review_path(submission_review) %></td>
         <td><% link_to 'Destroy', submission_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
