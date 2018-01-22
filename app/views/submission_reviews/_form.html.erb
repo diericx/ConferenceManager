@@ -16,7 +16,7 @@
       <%= form.hidden_field :submission_id, value: @submission.id %>
       <%= form.hidden_field :reviewer_id, value: current_user.id %>
   <% end %>
-
+  <%= form.hidden_field :final, value: is_final %>
   <table class="table">
       
       <tbody>

@@ -25,7 +25,7 @@
         <td><%= submission_review.breadth %></td>
         <td><%= submission_review.presentation_quality %></td>
         <td><%= submission_review.recommendation %></td>
-        <td><%= recommendation_options_choice[submission_review.recommendation][0] %></td>
+        <td><%= recommendation_options_display[submission_review.recommendation][0] %></td>
         <td><% link_to 'Show', submission_review %></td>
         <td><% link_to 'Edit', edit_submission_review_path(submission_review) %></td>
         <td><% link_to 'Destroy', submission_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
