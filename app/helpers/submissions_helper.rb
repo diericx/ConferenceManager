@@ -46,7 +46,7 @@ module SubmissionsHelper
           @final_decisions.push(recommendation_options_choice[final_review.recommendation][0])
         end
 
-        if reviews.length == 0
+        if reviews.length == 0 # if there are no reviews
           # nothing to calculate
           @reviews_completed.push(0)
           @innovation.push(0)
@@ -54,14 +54,14 @@ module SubmissionsHelper
           @quality.push(0)
           @recommendation.push(0)
           @reviews_percent.push(0)
-        else
+        else # if there is at least 1 review
           @reviews_percent.push(to_percent(reviews.length, reviewers.length))
           @reviews_completed.push(reviews.length)
 
           # get data for averages
           i = b = q = r = 0
           reviews.each do |review|
-            if review.conflict_of_interest == true || review.final
+            if review.conflict_of_interest || review.final
               next
             end
             i += review.innovation

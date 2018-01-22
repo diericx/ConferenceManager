@@ -47,7 +47,6 @@ module ApplicationHelper
 
     def average(num1, num2)
         perc = (num1.to_f / num2.to_f)
-        puts perc
         return perc.round(2)
     end
 
