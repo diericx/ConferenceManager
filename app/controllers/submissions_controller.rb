@@ -177,10 +177,16 @@ class SubmissionsController < ApplicationController
 
   def final_decisions_report
     @final_decision_reviews = []
-    params[:final_decision_reviews].each do |review_id|
+    @emails = ""
+    params[:final_decision_reviews].each_with_index do |review_id, index|
       submission_review = SubmissionReview.find(review_id)
       submission_review.submission = Submission.find(submission_review.submission_id)
       submission_review.submission.reviewers = []
+      # create email string
+      @emails += submission_review.submission.contact_email
+      if index != params[:final_decision_reviews].length - 1
+        @emails += ", "
+      end
       # add reviewers emails
       reviews = SubmissionReview.where(submission_id: submission_review.submission.id)
       reviews.each do |review|

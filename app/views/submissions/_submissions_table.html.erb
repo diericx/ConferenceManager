@@ -58,14 +58,32 @@
 </table>
 
 <script>
-    $(document).ready(function() {
-        $('#reviews-table').DataTable({
-        scrollY: 500,
-        "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">',
-        "iDisplayLength": 25,
-        "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-        });
-    });
 
     $('.dataTables_filter').addClass('pull-left');
 </script>
+
+<% if @should_show_admin_data %>
+    <script>
+        $(document).ready(function() {
+            $('#reviews-table').DataTable({
+                scrollY: 500,
+                "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">',
+                "iDisplayLength": 25,
+                "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "order": [7, "desc"]
+            });
+        });
+    </script>
+<% else %>
+<script>
+        $(document).ready(function() {
+            $('#reviews-table').DataTable({
+                scrollY: 500,
+                "dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">',
+                "iDisplayLength": 25,
+                "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "order": [4, "desc"]
+            });
+        });
+    </script>
+<% end %>

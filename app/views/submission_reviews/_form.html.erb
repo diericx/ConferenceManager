@@ -18,29 +18,33 @@
       <%= form.hidden_field :final, value: is_final %>
   <% end %>
 
+  <%= form.hidden_field :is_final, value: is_final %>
+
   <table class="table">
       
       <tbody>
-          <tr>
-            <td> Conflict of Interest </td>
-            <td> <%= form.check_box :conflict_of_interest %> </td>
-          </tr>
-          <tr>
-            <td> Innovation </td>
-            <td> <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %> </td>
-          </tr>
-          <tr>
-            <td> Breadth </td>
-            <td> <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %> </td>
-          </tr>
-          <tr>
-            <td> Presentation Quality </td>
-            <td> <%= form.select(:presentation_quality, presentation_quality_options, {}, {:class => "form-control"}) %> </td>
-          </tr>
-          <tr>
-            <td> Content could be presented publically/externally </td>
-            <td> <%= form.check_box :public_content %> </td>
-          </tr>
+          <% if !minimal %>
+            <tr>
+              <td> Conflict of Interest </td>
+              <td> <%= form.check_box :conflict_of_interest %> </td>
+            </tr>
+            <tr>
+              <td> Innovation </td>
+              <td> <%= form.select(:innovation, innovation_options, {}, {:class => "form-control"}) %> </td>
+            </tr>
+            <tr>
+              <td> Breadth </td>
+              <td> <%= form.select(:breadth, breadth_options, {}, {:class => "form-control"}) %> </td>
+            </tr>
+            <tr>
+              <td> Presentation Quality </td>
+              <td> <%= form.select(:presentation_quality, presentation_quality_options, {}, {:class => "form-control"}) %> </td>
+            </tr>
+            <tr>
+              <td> Content could be presented publically/externally </td>
+              <td> <%= form.check_box :public_content %> </td>
+            </tr>
+          <% end %>
           <tr>
             <td> Notes </td>
             <td> <%= form.text_area(:notes, class: "form-control") %> </td>

@@ -54,6 +54,21 @@
 
 </br>
 
+<% if is_admin?(current_user) %>
+  <div class="center">
+      <h3><strong>Final Decision</strong><h3>
+    </div>
+    
+    </br>
+
+    <div class="boxed"> 
+      </br>
+      <%= render '/submission_reviews/form', submission_review: @final_decision_submission_review, is_final: true, minimal: true %>
+    </div>
+<% end %>
+
+</br>
+
 <div class="center">
   <h3><strong>Average Review Scores</strong><h3>
 </div>
@@ -114,7 +129,7 @@
 
       <%= render '/submission_reviews/index' %>
   </div>
-  
+
 </br>
 
 <% if is_admin?(current_user) %> 
@@ -159,8 +174,7 @@
     </br>
 
     <% @submission_review = @user_submitted_review[0] %>
-    <%= render '/submission_reviews/form', submission_review: @submission_review, is_final: false %>
-    <!-- <%= render '/submission_reviews/show', submission_review: @submission_review, submission: @submission %> -->
+    <%= render '/submission_reviews/form', submission_review: @submission_review, is_final: false, minimal: false %>
   </div>
 <% else %>
   <div class="center">
@@ -172,23 +186,8 @@
   <div class="boxed"> 
     </br>
 
-    <%= render '/submission_reviews/form', submission_review: @submission_review, is_final: false %>
+    <%= render '/submission_reviews/form', submission_review: @submission_review, is_final: false, minimal: false %>
   </div>
-<% end %>
-
-</br>
-
-<% if is_admin?(current_user) %>
-  <div class="center">
-      <h3><strong>Final Decision</strong><h3>
-    </div>
-    
-    </br>
-
-    <div class="boxed"> 
-      </br>
-      <%= render '/submission_reviews/form', submission_review: @final_decision_submission_review, is_final: true %>
-    </div>
 <% end %>
 
 </br>
